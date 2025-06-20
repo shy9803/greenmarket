@@ -56,7 +56,7 @@ function ProductPage() {
 
   /* ── 컴포넌트 마운트 시 DB 에서 상품 불러오기 ── */
   useEffect(() => {
-    axios.get('http://localhost:9070/products')
+    axios.get('https://port-0-backend-mbiobig1cd0dc4c0.sel4.cloudtype.app/products')
       .then(res => {
         const items = res.data.map(p => ({
           id:        p.id,
