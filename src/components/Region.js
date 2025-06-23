@@ -105,7 +105,7 @@ function Region({onChange, defer = false}) {
 
   return (
     <>
-      <select id='logform_region' name='region' required value={selectRegion} onChange={handleRegion}>
+      <select id='logform_region' name='region' value={selectRegion} onChange={handleRegion}>
         <option value=''>도/특별시/광역시</option>
         {Object.keys(regionCity).map((region) => (
           <option key={region} value={region}>{region}</option>
@@ -115,7 +115,7 @@ function Region({onChange, defer = false}) {
 
       {/* 상단의 option 선택시 나오는 select */}
       {selectRegion && regionCity[selectRegion] && selectRegion !=='세종특별자치시' && (
-        <select id='logform_city' name='city' value={selectCity} onChange={handleCity} required>
+        <select id='logform_city' name='city' value={selectCity} onChange={handleCity}>
           <option value=''>시/군/구</option>
           {regionCity[selectRegion].map((city) => (
             <option key={city} value={city}>{city}</option>
@@ -125,11 +125,11 @@ function Region({onChange, defer = false}) {
 
       {/* 상단의 option에서 '세종시' 선택시 나오는 input */}
       {selectRegion === '세종특별자치시' && (
-        <input type='text' name='town' placeholder='읍/면/동을 입력해주세요' value={town} onChange={handleTown} required id='logform_town' />
+        <input type='text' name='town' placeholder='읍/면/동을 입력해주세요' value={town} onChange={handleTown} id='logform_town' />
       )}
       {/* 상단의 option에서 시/군/구 (대부분 해당) 선택시 나오는 input */}
       {selectCity && selectRegion !== '세종특별자치시' && (
-        <input type='text' name='town' placeholder='읍/면/동을 입력해주세요' value={town} onChange={handleTown} required id='logform_town' />
+        <input type='text' name='town' placeholder='읍/면/동을 입력해주세요' value={town} onChange={handleTown} id='logform_town' />
       )}
 
       {/* 최상단의 option에서 기타 선택시 나오는 input */}
