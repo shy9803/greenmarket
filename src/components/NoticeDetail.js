@@ -24,7 +24,7 @@ function NoticeDetail(props) {
     axios
     .get(`https://port-0-backend-mbiobig1cd0dc4c0.sel4.cloudtype.app/notice/${id}`)
     .then(res => {
-      console.log('서버 응답값 : ', res.data);
+      // console.log('서버 응답값 : ', res.data);
       setForm(res.data);
     })
     .catch(err => console.log('조회 오류 : ', err));
