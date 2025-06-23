@@ -129,7 +129,7 @@ function Cart({ token }) {
                 <td>
                   <img
                   
-                    src={product.image_main ? `http://localhost:9070/uploads/${product.image_main}` : '/default_image.png'}
+                    src={product.image_main ? `https://port-0-backend-mbiobig1cd0dc4c0.sel4.cloudtype.app/uploads/${product.image_main}` : '/default_image.png'}
                     alt={product.title}
                     width="80"
                   />
