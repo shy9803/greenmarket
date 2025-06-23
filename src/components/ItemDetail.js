@@ -13,7 +13,7 @@ function ItemDetail() {
   const [item, setItem] = useState(null);
 
   useEffect(() => {
-    axios.get(`http://localhost:9070/api/products/${id}`)
+    axios.get(`https://port-0-backend-mbiobig1cd0dc4c0.sel4.cloudtype.app/api/products/${id}`)
       .then(res => setItem(res.data))
       .catch(err => {
         console.error('상품 데이터를 불러오는 데 실패했습니다.', err);
@@ -47,7 +47,7 @@ function ItemDetail() {
               {imageList.map((img, i) => (
                 <SwiperSlide key={i} >
                   <img
-                    src={`http://localhost:9070/uploads/${img}`}
+                    src={`https://port-0-backend-mbiobig1cd0dc4c0.sel4.cloudtype.app/uploads/${img}`}
                     alt={`상품 이미지 ${i + 1}`}
                     className='item_detail_img'
                   />
@@ -84,7 +84,7 @@ function ItemDetail() {
               <li><button
   className='btn_cart'
   onClick={() => {
-    axios.post('http://localhost:9070/api/cart', { 
+    axios.post('https://port-0-backend-mbiobig1cd0dc4c0.sel4.cloudtype.app/api/cart', { 
       product_id: item.id
     }, {
       headers: { Authorization: `Bearer ${localStorage.getItem('token')}` }
