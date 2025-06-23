@@ -27,7 +27,7 @@ function MemberUpdate() {
     .then(res => {
       const fetched = res.data;
 
-      console.log('서버 응답값 : ', res.data);
+      // console.log('서버 응답값 : ', res.data);
       setForm(prevForm => {
         const isSame = 
         prevForm.username === fetched.username &&
