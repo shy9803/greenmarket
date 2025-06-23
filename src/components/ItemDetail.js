@@ -13,7 +13,7 @@ function ItemDetail() {
   const [item, setItem] = useState(null);
 
   useEffect(() => {
-    axios.get(`https://port-0-backend-mbiobig1cd0dc4c0.sel4.cloudtype.app/api/products/${id}`)
+    axios.get(`https://port-0-backend-mbiobig1cd0dc4c0.sel4.cloudtype.app/products/${id}`)
       .then(res => setItem(res.data))
       .catch(err => {
         console.error('상품 데이터를 불러오는 데 실패했습니다.', err);
@@ -84,7 +84,7 @@ function ItemDetail() {
               <li><button
   className='btn_cart'
   onClick={() => {
-    axios.post('https://port-0-backend-mbiobig1cd0dc4c0.sel4.cloudtype.app/api/cart', { 
+    axios.post('https://port-0-backend-mbiobig1cd0dc4c0.sel4.cloudtype.app/cart', { 
       product_id: item.id
     }, {
       headers: { Authorization: `Bearer ${localStorage.getItem('token')}` }
