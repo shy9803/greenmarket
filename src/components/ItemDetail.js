@@ -84,7 +84,7 @@ function ItemDetail() {
               <li><button
   className='btn_cart'
   onClick={() => {
-    axios.post('https://port-0-backend-mbiobig1cd0dc4c0.sel4.cloudtype.app/cart', { 
+    axios.post('https://port-0-backend-mbiobig1cd0dc4c0.sel4.cloudtype.app/api/cart', { 
       product_id: item.id
     }, {
       headers: { Authorization: `Bearer ${localStorage.getItem('token')}` }
