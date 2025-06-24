@@ -17,7 +17,7 @@ function Cart({ token }) {
           return;
         }
 
-        const res = await axios.get('https://port-0-backend-mbiobig1cd0dc4c0.sel4.cloudtype.app/cart', {
+        const res = await axios.get('https://port-0-backend-mbiobig1cd0dc4c0.sel4.cloudtype.app/api/cart', {
           headers: { Authorization: `Bearer ${actualToken}` },
         });
 
