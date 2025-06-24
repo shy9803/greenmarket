@@ -23,7 +23,7 @@ function MemberUpdate() {
   // 발송 데이터 통신 성공여부 확인 출력
   useEffect(() => {
     axios
-    .get(`https://port-0-backend-mbiobig1cd0dc4c0.sel4.cloudtype.app/member/${id}`) // 전체 조회된 내용 중 숫자를 get방식으로 하여 해당 내용 조회.
+    .get(`https://port-0-backend-mbiobig1cd0dc4c0.sel4.cloudtype.app/api/member/${id}`) // 전체 조회된 내용 중 숫자를 get방식으로 하여 해당 내용 조회.
     .then(res => {
       const fetched = res.data;
 
