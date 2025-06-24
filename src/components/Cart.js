@@ -46,7 +46,7 @@ function Cart({ token }) {
     if (selectedIds.length === 0) return;
 
     try {
-      await axios.delete('https://port-0-backend-mbiobig1cd0dc4c0.sel4.cloudtype.app/cart', {
+      await axios.delete('https://port-0-backend-mbiobig1cd0dc4c0.sel4.cloudtype.app/api/cart', {
         data: { ids: selectedIds },
         headers: { Authorization: `Bearer ${actualToken}` },
       });
@@ -61,7 +61,7 @@ function Cart({ token }) {
     if (allIds.length === 0) return;
 
     try {
-      await axios.delete('https://port-0-backend-mbiobig1cd0dc4c0.sel4.cloudtype.app/cart', {
+      await axios.delete('https://port-0-backend-mbiobig1cd0dc4c0.sel4.cloudtype.app/api/cart', {
         data: { ids: allIds },
         headers: { Authorization: `Bearer ${actualToken}` },
       });
@@ -73,7 +73,7 @@ function Cart({ token }) {
 
   const handleDeleteSingle = async (id) => {
     try {
-      await axios.delete('https://port-0-backend-mbiobig1cd0dc4c0.sel4.cloudtype.app/cart', {
+      await axios.delete('https://port-0-backend-mbiobig1cd0dc4c0.sel4.cloudtype.app/api/cart', {
         data: { ids: [id] },
         headers: { Authorization: `Bearer ${actualToken}` },
       });
