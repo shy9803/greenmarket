@@ -19,7 +19,7 @@ function NoticeUpdate() {
   // 데이터 송수신 성공/실패
   useEffect(() => {
     axios
-    .get(`https://port-0-backend-mbiobig1cd0dc4c0.sel4.cloudtype.app/api/notice/${id}`)
+    .get(`https://port-0-backend-mbiobig1cd0dc4c0.sel4.cloudtype.app/notice/${id}`)
     .then(res => {
       // console.log('서버 응답값 : ', res.data);
       setForm(res.data);
