@@ -37,7 +37,7 @@ function NoticeUpdate() {
     e.preventDefault();
 
     axios
-    .put(`https://port-0-backend-mbiobig1cd0dc4c0.sel4.cloudtype.app/update/${id}`, {
+    .put(`https://port-0-backend-mbiobig1cd0dc4c0.sel4.cloudtype.app/notice/update/${id}`, {
       category: form.category,
       title: form.title,
       writer: form.writer,
