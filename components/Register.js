@@ -148,7 +148,9 @@ function Register(props) {
           </div>
           <div>
           {isOpen && 
-          <textarea cols='73' rows='10' readOnly id='logform_agreetxt' name='agreetxt' value={text} style={{height: isOpen ? '220px' : '0', overflow: 'hidden', transition: 'height 0.3s ease'}}>
+          <textarea cols='73' rows='10' readOnly id='logform_agreetxt' name='agreetxt' value={text} 
+          // style={{height: isOpen ? '220px' : '0'}}
+          >
             {/* 텍스트 파일 불러오기로 입력 */}
           </textarea>}
           </div>
