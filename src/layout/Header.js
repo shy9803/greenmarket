@@ -83,7 +83,7 @@ function Header() {
         <div className='header_search_wrap'>
           <form>
             <FontAwesomeIcon icon={faMagnifyingGlass} className="header_search-icon" />
-            <input type='text' />
+            <input type='text' placeholder='검색어를 입력해주세요' />
           </form>
         </div>
 
