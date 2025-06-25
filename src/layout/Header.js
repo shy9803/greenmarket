@@ -143,7 +143,7 @@ function Header() {
               <>
                 <li className='header_username_wrap'><span className='header_username'>{username}님!</span></li>
                 <li>
-                  <button>
+                  <button onClick={handleLogout}>
                     <FontAwesomeIcon icon={faSignOut} className="header_logout-icon" />
                     <span className="header_logout-text">로그아웃</span>
                   </button>
