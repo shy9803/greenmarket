@@ -8,15 +8,16 @@ import {
 
 function Footer(props) {
   const [isOpen, setIsOpen] = useState(false);
-  const [footerHeight, setFooterHeight] = useState('200px'); // 높이 상태 추가
+  /*const [footerHeight, setFooterHeight] = useState('200px'); // 높이 상태 추가*/
 
   const toggleOpen = () => {
     setIsOpen(prev => !prev);
-    setFooterHeight(prev => (prev === '200px' ? '450px' : '200px')); // 열고 닫을 때 높이 토글
+    /* setFooterHeight(prev => (prev === '200px' ? '450px' : '200px')); // 열고 닫을 때 높이 토글 => 반응형일 때, 토클 열릴경우 높이값 450으로 고정되는 문제 발생 */
   };
 
   return (
-    <footer style={{ height: footerHeight, transition: 'height 0.3s ease' }}>
+    // <footer style={{ height: footerHeight, transition: 'height 0.3s ease' }}>
+    <footer className={`footer ${isOpen ? 'open' : ''}`}>
       <div className='footer_wrap'>
         <div className='footer_gnb'>
           <ul>
@@ -50,7 +51,7 @@ function Footer(props) {
           className={`footer_con ${isOpen ? 'open' : 'closed'}`}
         >
           <div className='footer_address'>
-            <p style={{fontWeight:'bold',fontSize:'14px'}}>그린마켓(주) &#124; C조 그린마켓</p>
+            <p>그린마켓(주) &#124; C조 그린마켓</p>
             <p>사업자등록번호 : 113-86-45834</p>
             <p>호스팅서비스 제공자 : Amazon Web Services (AWS)</p>
             <p>EMAIL : help&#64;greenmarket.co.kr</p>
@@ -58,12 +59,12 @@ function Footer(props) {
           </div>
 
           <div className='footer_cs_tel'>
-            <p style={{fontWeight:'bold',fontSize:'14px'}}>고객센터</p>
+            <p>고객센터</p>
             <p>1670-2910</p>
           </div>
 
           <div className='footer_cs'>
-            <p style={{fontWeight:'bold',fontSize:'14px'}}>CS운영시간</p>
+            <p>CS운영시간</p>
             <p className='footer_cs_time'>
               9:00 - 18:00시 <br />
               (주말/공휴일 휴무, 점심시간 12:00 - 13:00)
