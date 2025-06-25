@@ -174,7 +174,7 @@
   box-sizing: border-box;
   padding: 4px 5px;
   font-size: var(--sm_font); /* 15px */
-  height: '220px';
+  /* height: '220px'; */
   overflow: hidden;
   transition: height 0.3s ease;
 }
