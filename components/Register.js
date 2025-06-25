@@ -146,7 +146,7 @@ function Register(props) {
             </span>
             {/* 조건 ? (참) 위화살(=펼쳤을때) : (거짓) 아래화살(=접혔을때) */}
           </div>
-          <div style={{height: isOpen ? '220px' : '0', overflow: 'hidden', transition: 'height 0.3s ease'}}>
+          <div style={{height: isOpen ? '220px' : '0'}}>
           {isOpen && 
             <textarea cols='73' rows='10' readOnly id='logform_agreetxt' name='agreetxt' value={            text}>
               {/* 텍스트 파일 불러오기로 입력 */}
