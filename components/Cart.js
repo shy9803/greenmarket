@@ -17,7 +17,7 @@ function Cart({ token }) {
           return;
         }
 
-        const res = await axios.get('http://localhost:9070/api/cart', {
+        const res = await axios.get('https://port-0-backend-mbiobig1cd0dc4c0.sel4.cloudtype.app/api/cart', {
           headers: { Authorization: `Bearer ${actualToken}` },
         });
 
@@ -46,7 +46,7 @@ function Cart({ token }) {
     if (selectedIds.length === 0) return;
 
     try {
-      await axios.delete('http://localhost:9070/api/cart', {
+      await axios.delete('https://port-0-backend-mbiobig1cd0dc4c0.sel4.cloudtype.app/api/cart', {
         data: { ids: selectedIds },
         headers: { Authorization: `Bearer ${actualToken}` },
       });
@@ -61,7 +61,7 @@ function Cart({ token }) {
     if (allIds.length === 0) return;
 
     try {
-      await axios.delete('http://localhost:9070/api/cart', {
+      await axios.delete('https://port-0-backend-mbiobig1cd0dc4c0.sel4.cloudtype.app/api/cart', {
         data: { ids: allIds },
         headers: { Authorization: `Bearer ${actualToken}` },
       });
@@ -73,7 +73,7 @@ function Cart({ token }) {
 
   const handleDeleteSingle = async (id) => {
     try {
-      await axios.delete('http://localhost:9070/api/cart', {
+      await axios.delete('https://port-0-backend-mbiobig1cd0dc4c0.sel4.cloudtype.app/api/cart', {
         data: { ids: [id] },
         headers: { Authorization: `Bearer ${actualToken}` },
       });
@@ -129,7 +129,7 @@ function Cart({ token }) {
                 <td>
                   <img
                   
-                    src={product.image_main ? `http://localhost:9070/uploads/${product.image_main}` : '/default_image.png'}
+                    src={product.image_main ? `https://port-0-backend-mbiobig1cd0dc4c0.sel4.cloudtype.app/uploads/${product.image_main}` : '/default_image.png'}
                     alt={product.title}
                     width="80"
                   />

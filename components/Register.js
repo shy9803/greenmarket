@@ -57,7 +57,7 @@ function Register(props) {
       }
 
       // 전송
-      await axios.post('http://localhost:9070/register', {
+      await axios.post('https://port-0-backend-mbiobig1cd0dc4c0.sel4.cloudtype.app/register', {
         username: form.username,
         userid: form.userid,
         password: form.password,
@@ -95,7 +95,7 @@ function Register(props) {
 
   // 이용약관 불러오기
   useEffect(() => {
-    fetch('/agreetxt.txt') /* 파일경로 : frontend - public폴더 */
+    fetch('/agreetxt.txt')
     .then((res) => res.text())
     .then((data) => setText(data));
   }, []);
@@ -148,9 +148,7 @@ function Register(props) {
           </div>
           <div>
           {isOpen && 
-          <textarea cols='73' rows='10' readOnly id='logform_agreetxt' name='agreetxt' value={text} 
-          // style={{height: isOpen ? '220px' : '0'}}
-          >
+          <textarea cols='73' rows='10' readOnly id='logform_agreetxt' name='agreetxt' value={            text}>
             {/* 텍스트 파일 불러오기로 입력 */}
           </textarea>}
           </div>
