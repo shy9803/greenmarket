@@ -5,7 +5,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronDown, faChevronUp } from '@fortawesome/free-solid-svg-icons';
 
 import Region from './Region'; // 지역 선택 별도 연결
-import './style/LogForm.css';
+import '../style/LogForm.css';
 
 function Register(props) {
   const [form, setForm] = useState({
