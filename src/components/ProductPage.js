@@ -1,109 +1,107 @@
 // components/ProductPage.js
-import React, { useState, useMemo, useEffect, useCallback } from 'react';
+import React, { useState, useMemo, useEffect } from 'react';
 // import { Link } from 'react-router-dom';
 import axios from 'axios';
 import { useLocation, useNavigate } from 'react-router-dom'; // 검색기능
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronDown, faChevronUp, faSearch } from '@fortawesome/free-solid-svg-icons';
-
 import '../style/productpage.css';
-
 import Slide from './Slide';
 import ItemCard2 from './ItemCard2';
 import dummyProducts from '../data/dummyProducts.json'; // 더미 상품
 
-// URL 주소 (유지보수성 탁월)
-const BASE_URL = 'https://port-0-backend-mbioc25168a38ca1.sel4.cloudtype.app';
-
 /* ▸ 필터용 상수 (원본 그대로) */
-const CATEGORY = ['여성의류', '남성의류', '가방', '신발', '패션잡화', '키즈', '라이프', '전자기기', '반려동물','기타'];
-const BRAND = ['NoBrand', '나이키', '아디다스', '자라', '유니클로', '폴로 랄프 로렌', '타미힐피거', '리바이스', '타미힐피거','리바이스', '삼성', '애플', '다이소'];
+const CATEGORY = [
+  '여성의류', '남성의류', '가방', '신발',
+  '패션잡화', '키즈', '라이프', '전자기기', '반려동물','기타',
+];
+const BRAND = [
+  'NoBrand', '나이키', '아디다스', '자라', '유니클로',
+  '폴로 랄프 로렌', '타미힐피거', '리바이스', '타미힐피거',
+  '리바이스', '삼성', '애플', '다이소',
+];
 const CONDITION = ['새상품(미개봉)', '거의 새상품(상)', '사용감 있는 깨끗한 상품(중)', '사용 흔적이 많이 있는 상품(하)'];
 const SALESTATE = ['판매중', '판매완료'];
 
-export default function ProductPage() {
+function ProductPage() {
   const navigate = useNavigate();
-  const { search } = useLocation();
-
-  /* ── 기존 상태 (필터/검색) ── */
-  const [openKey, setOpenKey]       = useState(null);
-  const [categories, setCategories] = useState([]);
-  const [brands, setBrands]         = useState([]);
-  const [conditions, setConditions] = useState([]);
-  const [states, setStates]         = useState([]);
-  const [priceMin, setPriceMin]     = useState('');
-  const [priceMax, setPriceMax]     = useState('');
-  /* ── 검색어 상태 ── */
-  const [searchInput, setSearchInput] = useState('');
-  const [searchTerm, setSearchTerm]   = useState('');
-  /* ── 가격 입력 상태 (적용 전) ── */
-  const [tempPriceMin, setTempPriceMin] = useState('');
-  const [tempPriceMax, setTempPriceMax] = useState('');
-
-  // ── 상품 데이터 ──
-  const [apiItems, setApiItems]     = useState([]);
-  const [dummyItems, setDummyItems] = useState([]); 
-  /* ── DB 연동 상태 ── */
-  // const [productItems, setProductItems] = useState([]);  // API 로 받은 상품 리스트
-
-  /* ── 배열 토글 헬퍼 ── */
-  const toggleArray = (v, setter) => setter(prev => prev.includes(v) ? prev.filter(i => i !== v) : [...prev, v]);
-
-  /* ── URL 파라미터(keyword) 처리 ── */
-  useEffect(() => {
-    const qp = new URLSearchParams(search);
-    const kw = qp.get('keyword') || '';
-    // if (kw) {
-      setSearchInput(kw);
-      setSearchTerm(kw);
-    // }
-  }, [search]);
+    const { search } = useLocation();
+  
+    /* ── 기존 상태 (필터/검색) ── */
+    const [openKey, setOpenKey]       = useState(null);
+    const [categories, setCategories] = useState([]);
+    const [brands, setBrands]         = useState([]);
+    const [conditions, setConditions] = useState([]);
+    const [states, setStates]         = useState([]);
+    const [priceMin, setPriceMin]     = useState('');
+    const [priceMax, setPriceMax]     = useState('');
+  
+    /* ── 검색어 상태 ── */
+    const [searchInput, setSearchInput] = useState('');
+    const [searchTerm, setSearchTerm]   = useState('');
+  
+    /* ── 가격 입력 상태 (적용 전) ── */
+    const [tempPriceMin, setTempPriceMin] = useState('');
+    const [tempPriceMax, setTempPriceMax] = useState('');
+  
+    /* ── DB 연동 상태 ── */
+    const [productItems, setProductItems] = useState([]);  // API 로 받은 상품 리스트
+  
+    /* ── 배열 토글 헬퍼 ── */
+    const toggleArray = (v, setter) => setter(prev => prev.includes(v) ? prev.filter(i => i !== v) : [...prev, v]);
+  
+    /* ── URL 파라미터(keyword) 처리 ── */
+    useEffect(() => {
+      const qp = new URLSearchParams(search);
+      const kw = qp.get('keyword') || '';
+      if (kw) {
+        setSearchInput(kw);
+        setSearchTerm(kw);
+      }
+    }, [search]);
 
   /* ── 컴포넌트 마운트 시 DB 에서 상품 불러오기 ── */
-  // 데이터 로드: API + 더미
   useEffect(() => {
-    // 등록 후 GET 호출로 apiItems 갱신
-    // (기존 공유 코드로는 등록한 내용 미출력)
-    const loadData = async () => {
-      try {
-        const res = await axios.get(`${BASE_URL}/greenmarket/products`);
-        setApiItems(res.data.map(p => ({
+    axios.get('https://port-0-backend-mbiobig1cd0dc4c0.sel4.cloudtype.app/products')
+      .then(res => {
+        // 실 DB 상품
+        const apiItems = res.data.map(p => ({
           id:        p.id,
-          imageUrl:  `${BASE_URL}/uploads/${p.images[0] || ''}`,
+          image:     p.images[0] || '',           // 첫 번째 이미지 파일명
           brand:     p.brand,
           name:      p.title,
           price:     p.price,
+          // time: new Date(p.datetime).toLocaleString(),   // 등록일시
           datetime:  p.datetime,
           category:  p.kind,
           condition: p.condition,
-          state:     '판매중'
-        })));
-      } catch (err) {
-        console.error('상품 목록 불러오기 실패:', err);
-      }
-    };
-
-    loadData();
-
-    setDummyItems(dummyProducts.map(d => ({
-      id:        d.id + 1000,
-      imageUrl:  `${process.env.PUBLIC_URL}/images/${d.images[0]}`,
-      brand:     d.brand,
-      name:      d.title,
-      price:     d.price,
-      datetime:  new Date().toISOString(),
-      category:  d.kind,
-      condition: d.condition,
-      state:     d.trade_type === '직거래' ? '판매중' : '판매완료'
-    })));
-  }, [search]); // refresh=1 감지
+          state:     p.status === 'available' ? '판매완료' : '판매중',
+        }));
+        
+        // 더미 상품
+        const dummyItems = dummyProducts.map(d => ({
+          id:        d.id + 1000,
+          image:     d.images[0],
+          brand:     d.brand,
+          name:      d.title,
+          price:     d.price,
+          datetime:  new Date().toISOString(),
+          category:  d.kind,
+          condition: d.condition,
+          state:     d.trade_type === '직거래' ? '판매중' : '판매완료'
+        }));
+        // 머지 (더미 먼저, 최신 등록 DB 상품이 상단)
+        setProductItems([...dummyItems, ...apiItems]);
+      })
+      .catch(console.error);
+  }, []);
 
   /* ── 검색 입력 핸들러 ── */
     /* ── 검색창 onChange → 공백이면 검색어 초기화 ── */
     const handleSearchChange = e => {
       const v = e.target.value;
       setSearchInput(v);
-      if (!v.trim()) {
+      if (v.trim() === '') {
         setSearchTerm('');
         navigate('/productpage');
       }
@@ -116,18 +114,16 @@ export default function ProductPage() {
         const v = e.target.value.trim();
         setSearchInput(v);
         setSearchTerm(v);
-        navigate(v ? `/productpage?keyword=${encodeURIComponent(v)}` : '/productpage');
+        navigate(v
+          ? `/productpage?keyword=${encodeURIComponent(v)}`
+          : '/productpage'
+        );
       }
     };
   
     /* ── 필터 & 검색 적용 ── */
-    // 공통 필터 로직
-    // const filtered = useMemo(() => {return productItems.filter(it => {
-    
-    // 기존 공유분에서 const applyFilter = list => list.filter(it => { 가
-    // 'React의 useMemo 훅에서 applyFilter가 종속성 배열에 없기 때문에 생기는 경고'로 인해 수정
-    const applyFilter = useCallback((list) => {
-      return list.filter(it => {
+    const filtered = useMemo(() => {
+      return productItems.filter(it => {
         if (categories.length && !categories.includes(it.category)) return false;
         if (brands.length && !brands.includes(it.brand)) return false;
         if (conditions.length && !conditions.includes(it.condition)) return false;
@@ -136,25 +132,19 @@ export default function ProductPage() {
         // if (priceMax && it.price > Number(priceMax)) return false;
         if (priceMin && it.price < +priceMin) return false;
         if (priceMax && it.price > +priceMax) return false;
-
+  
         // ★ 여기부터 검색어 체크: title(name), brand, category 모두 검사
         if (searchTerm) {
           const kw = searchTerm.toLowerCase();
-          // const inName = it.name.toLowerCase().includes(kw);
-          // const inBrand = it.brand?.toLowerCase().includes(kw);
-          // const inKind = it.category?.toLowerCase().includes(kw);
-          // if (! (inName || inBrand || inKind) ) return false;
-          if (![it.name, it.brand, it.category].some(f => f?.toLowerCase().includes(kw))) return false;
+          const inName = it.name.toLowerCase().includes(kw);
+          const inBrand = it.brand?.toLowerCase().includes(kw);
+          const inKind = it.category?.toLowerCase().includes(kw);
+          if (! (inName || inBrand || inKind) ) return false;
         }
+  
         return true;
       });
-    }, [categories, brands, conditions, states, priceMin, priceMax, searchTerm]);
-
-    // }, [productItems, categories, brands, conditions, states, priceMin, priceMax, searchTerm]);
-    const filteredApi   = useMemo(() => applyFilter(apiItems), [apiItems,   applyFilter]);
-    const filteredDummy = useMemo(() => applyFilter(dummyItems), [dummyItems, applyFilter]);
-
-    const combinedItems = useMemo(() => [...filteredApi, ...filteredDummy], [filteredApi, filteredDummy]); // 합치기
+    }, [productItems, categories, brands, conditions, states, priceMin, priceMax, searchTerm]);
 
   return (
     <>
@@ -191,7 +181,7 @@ export default function ProductPage() {
               {CATEGORY.map(c => (
                 <li
                   key={c}
-                  className={categories.includes(c) ? 'on' : ''}
+                  className={categories.includes(c)?'on':''}
                   onClick={() => toggleArray(c, setCategories)}
                 >{c}</li>
               ))}
@@ -222,14 +212,12 @@ export default function ProductPage() {
                 type="number" placeholder="최소"
                 value={tempPriceMin}
                 onChange={e => setTempPriceMin(e.target.value)}
-                maxLength='10'
               />
               <span>&#126;</span>
               <input
                 type="number" placeholder="최대"
                 value={tempPriceMax}
                 onChange={e => setTempPriceMax(e.target.value)}
-                maxLength='10'
               />
               <button
                 className={(tempPriceMin && tempPriceMax) ? 'active' : ''}
@@ -314,17 +302,16 @@ export default function ProductPage() {
         </div>
 
         {/* ── 상품 리스트 ── */}
-        {/* 내가 등록한 상품 (DB) + 더미 상품 */}
         <ul className="productpage_items_list">
-          {combinedItems.map(it=>(
+          {filtered.map(it => (
             <ItemCard2
               key={it.id}
               id={it.id}
-              imgSrc={it.imageUrl}
+              imgSrc={`https://port-0-backend-mbiobig1cd0dc4c0.sel4.cloudtype.app/uploads/${it.image}`}
               brand={it.brand}
               name={it.name}
               price={`${it.price.toLocaleString()}원`}
-              time={it.datetime}
+              time={it.time}
             />
           ))}
         </ul>
@@ -333,4 +320,4 @@ export default function ProductPage() {
   );
 }
 
-// GPT를 통해 useMemo 종속성 연결, 상품 등록 후 미갱신으로 인한 미출력 해결
+export default ProductPage;
