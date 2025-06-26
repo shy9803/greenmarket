@@ -131,6 +131,7 @@ function GoodsInsert() {
     });
   
     try {
+      // const res = await axios.post('https://port-0-backend-mbiobig1cd0dc4c0.sel4.cloudtype.app/products', fd, {
       await axios.post('https://port-0-backend-mbiobig1cd0dc4c0.sel4.cloudtype.app/products', fd, {
         headers: {
           'Content-Type': 'multipart/form-data',

@@ -8,7 +8,7 @@ import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import 'swiper/css/autoplay';
-import '../style/slide.css'
+import '../style/slide.css';
 
 function Slide() {
   const slides = [

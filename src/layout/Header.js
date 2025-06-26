@@ -20,14 +20,6 @@ function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
 
-  // const linkStyle = {
-  //   display: 'block',
-  //   padding: '6px 16px',
-  //   fontSize: '1rem',
-  //   color: '#333',
-  //   textDecoration: 'none',
-  // };
-
   useEffect(() => {
     const storedName = localStorage.getItem('username');
     const storedId = localStorage.getItem('id'); // 사용자 ID (회원정보 수정을 위함)
@@ -59,18 +51,29 @@ function Header() {
   return (
     <header>
       <div className='header_wrap'>
+        {/* 로고 */}
         <div className='header_logo'>
           <Link to="/">
-          <img
-            src={`${process.env.PUBLIC_URL}/images/header_logo.png`}
-            alt="메뉴보기"
-          />
+            <img src={`${process.env.PUBLIC_URL}/images/header_logo.png`} alt="Green Market" />
           </Link>
         </div>
 
+        {/* 모바일 검색 + 토글메뉴 */}
         <div className='mobile_menu_wrap'>
-          <FontAwesomeIcon icon={faMagnifyingGlass} className="header_search-icon_mb" />
-          
+          <form
+            onSubmit={e => {
+              e.preventDefault();
+              const kw = e.target.keyword.value.trim();
+              if (kw) navigate(`/productpage?keyword=${encodeURIComponent(kw)}`);
+            }}
+          >
+            {/* 아이콘을 버튼으로 감싸 클릭해도 submit */}
+            <button type="submit" className="header_search-icon_mb">
+              <FontAwesomeIcon icon={faMagnifyingGlass} />
+            </button>
+            <input name="keyword" type="text" placeholder="검색어" maxLength='30' />
+          </form>
+
           <button
             className="mobile_menu_btn"
             onClick={() => setMenuOpen(!menuOpen)}
@@ -80,10 +83,18 @@ function Header() {
           </button>
         </div>
 
+        {/* PC 검색창 */}
         <div className='header_search_wrap'>
-          <form>
-            <FontAwesomeIcon icon={faMagnifyingGlass} className="header_search-icon" />
-            <input type='text' placeholder='검색어를 입력해주세요' />
+          <form onSubmit={e => {
+            e.preventDefault();
+            const kw = e.target.keyword.value.trim();
+            if (kw) navigate(`/productpage?keyword=${encodeURIComponent(kw)}`);
+          }}>
+            {/* submit 버튼으로 변경 */}
+            <button type="submit" className="header_search-icon">
+              <FontAwesomeIcon icon={faMagnifyingGlass} />
+            </button>
+            <input name="keyword" type='text' placeholder="검색어를 입력해주세요" maxLength='30' />
           </form>
         </div>
 
@@ -91,18 +102,11 @@ function Header() {
         {menuOpen && windowWidth < 768 && (
           <>
             {/* 검은 배경 오버레이 */}
-            <div
-              className="mobile_overlay"
-              onClick={() => setMenuOpen(false)}
+            <div className="mobile_overlay" onClick={() => setMenuOpen(false)}
             />
 
             {/* 오른쪽에서 슬라이드로 나오는 메뉴 */}
-            <div
-              className="mobile_menu"
-              style={{
-                transform: menuOpen ? 'translateX(250px)': 'translateX(100%)',
-              }}
-            >
+            <div className="mobile_menu" style={{ transform: menuOpen ? 'translateX(250px)': 'translateX(100%)'}}>
               <ul>
                 {username ? (
                   <>
@@ -110,6 +114,7 @@ function Header() {
                     <li>
                       <button onClick={handleLogout}>로그아웃</button>
                     </li>
+                    <li><Link to={`/member/update/${id}`} onClick={() => setMenuOpen(false)}>회원수정</Link></li>
                     <li><Link to="/cart" onClick={() => setMenuOpen(false)}>장바구니</Link></li>
                   </>
                 ) : (
@@ -118,15 +123,8 @@ function Header() {
                     <li><Link to="/register" onClick={() => setMenuOpen(false)}>회원가입</Link></li>
                   </>
                 )}
-                <li><Link to="/notice" onClick={() => setMenuOpen(false)} >고객센터</Link></li>
+                <li><Link to="/notice" onClick={() => setMenuOpen(false)}>고객센터</Link></li>
               </ul>
-
-              <ul>
-                <li><Link to="/notice" onClick={() => setMenuOpen(false)} >공지사항</Link></li>
-                <li><Link to="/inquiry" onClick={() => setMenuOpen(false)}>1:1 문의하기</Link></li>
-                <li><Link to="/qna" onClick={() => setMenuOpen(false)}>자주 묻는 질문</Link></li>
-              </ul>
-
               <ul>
                 <li><Link to="/productpage" onClick={() => setMenuOpen(false)}>중고마켓</Link></li>
                 <li><Link to="/goodsinsert" onClick={() => setMenuOpen(false)}>판매등록</Link></li>
@@ -144,20 +142,20 @@ function Header() {
                 <li className='header_username_wrap'><span className='header_username'>{username}님!</span></li>
                 <li>
                   <button onClick={handleLogout}>
-                    <FontAwesomeIcon icon={faSignOut} className="header_logout-icon" />
-                    <span className="header_logout-text">로그아웃</span>
+                    <FontAwesomeIcon icon={faSignOut} />
+                    로그아웃
                   </button>
                 </li>
                 <li>
                   <Link to={`/member/update/${id}`}>
-                    <FontAwesomeIcon icon={faUser} className="header_userup-icon" />
-                    <span className="header_userup-text">회원수정</span>
+                    <FontAwesomeIcon icon={faUser} />
+                    회원수정
                   </Link>
                 </li>
                 <li>
                   <Link to="/cart">
-                    <FontAwesomeIcon icon={faShoppingCart} className="header_cart-icon" />
-                    <span className="header_cart-text">장바구니</span>
+                    <FontAwesomeIcon icon={faShoppingCart} />
+                    장바구니
                   </Link>
                 </li>
               </>
@@ -165,22 +163,22 @@ function Header() {
               <>
                 <li>
                   <Link to="/login">
-                    <FontAwesomeIcon icon={faUser} className="header_login-icon" />
-                    <span className="header_login-text">로그인</span>
+                    <FontAwesomeIcon icon={faUser} />
+                    로그인
                   </Link>
                 </li>
                 <li>
                   <Link to="/register">
-                    <FontAwesomeIcon icon={faUserPlus} className="header_register-icon" />
-                    <span className="header_register-text">회원가입</span>
+                    <FontAwesomeIcon icon={faUserPlus} />
+                    회원가입
                   </Link>
                 </li>
               </>
             )}
             <li>
               <Link to="/notice">
-                <FontAwesomeIcon icon={faHeadset} className="header_cs-icon" />
-                <span className="header_cs-text">고객센터</span>
+                <FontAwesomeIcon icon={faHeadset} />
+                고객센터
               </Link>
             </li>
           </ul>

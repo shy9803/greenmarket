@@ -88,3 +88,35 @@
   filter: blur(20px);                   /* 가장자리 블러 강도 */
   z-index: -1;                          /* 텍스트 뒤로 */
 }
+
+/* 태블릿과 모바일에 공통 적용 */
+@media screen and (max-width: 1024px) {
+  .upcon_menubox {
+    width: 100%;
+  }
+  .upcon_menubox ul {width: 100%; text-align: center;}
+  .upcon_menubox li {width: 100%; margin: 0px auto;}
+  .upcon_menuimg p {
+    font-size: 1.25rem; /* 20px */
+  }
+}
+
+/* 태블릿 전용 */
+@media screen and (min-width: 768px) and (max-width: 1024px) {
+}
+
+/* 모바일 전용 */
+@media screen and (max-width: 767px) {
+  .upcon_menuimg p::before {
+    width: 80px; /* 원 지름: 필요에 따라 조절 */
+  }
+  .upcon_menuimg p {
+    top: 45%;
+  }
+
+  .upcon_menubox {
+    margin: 5% auto; /* 하단 목록과 좌우 여백 동일시, 상하 축소(한 화면에 최대한 메뉴 전체가 보이게) */
+  }
+  .upcon_menubox ul {flex-wrap: wrap;}
+  .upcon_menubox li {width: 50%; margin: 10px auto;}
+}
