@@ -26,7 +26,7 @@ function GoodsInsert() {
     kind: '',
     brand: '',
     price: '',
-    tradeType: '',
+    trade_type: '',
     condition: '',
     region: '',
     description: '',
@@ -92,9 +92,9 @@ function GoodsInsert() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const { title, kind, brand, price, tradeType, condition, region, description, shipping_fee } = formData;
+    const { title, kind, brand, price, trade_type, condition, region, description, shipping_fee } = formData;
   
-    if (!title || !kind || !brand || !price || !tradeType || !condition || !region || !description || !shipping_fee) {
+    if (!title || !kind || !brand || !price || !trade_type || !condition || !region || !description || !shipping_fee) {
       alert('모든 항목을 입력해주세요.');
       return;
     }
@@ -119,7 +119,7 @@ function GoodsInsert() {
     fd.append('brand', brand);
     fd.append('kind', kind);         
     fd.append('price', price);
-    fd.append('tradeType', tradeType);
+    fd.append('trade_type', trade_type);
     fd.append('condition', condition);
     fd.append('region', region);
     fd.append('description', description);
@@ -301,12 +301,12 @@ function GoodsInsert() {
 
         {/* 거래방식 */}
         <p>
-          <label htmlFor="tradeType">거래 방식</label>
+          <label htmlFor="trade_type">거래 방식</label>
           <select
-            name="tradeType"
-            id="tradeType"
+            name="trade_type"
+            id="trade_type"
             required
-            value={formData.tradeType}
+            value={formData.trade_type}
             onChange={handleChange}
           >
             <option value="">-- 선택 --</option>
