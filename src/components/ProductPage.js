@@ -2,6 +2,7 @@
 import React, { useState, useMemo, useEffect } from 'react';
 // import { Link } from 'react-router-dom';
 import axios from 'axios';
+import { useLocation, useNavigate } from 'react-router-dom'; // 검색기능
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronDown, faChevronUp, faSearch } from '@fortawesome/free-solid-svg-icons';
 import '../style/productpage.css';
