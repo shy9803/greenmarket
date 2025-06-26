@@ -62,8 +62,11 @@ export default function ProductPage() {
   /* ── 컴포넌트 마운트 시 DB 에서 상품 불러오기 ── */
   // 데이터 로드: API + 더미
   useEffect(() => {
-    axios.get(`${BASE_URL}/greenmarket/products`)
-      .then(res => {
+    // 등록 후 GET 호출로 apiItems 갱신
+    // (기존 공유 코드로는 등록한 내용 미출력)
+    const loadData = async () => {
+      try {
+        const res = await axios.get(`${BASE_URL}/greenmarket/products`);
         setApiItems(res.data.map(p => ({
           id:        p.id,
           imageUrl:  `${BASE_URL}/uploads/${p.images[0] || ''}`,
@@ -75,8 +78,12 @@ export default function ProductPage() {
           condition: p.condition,
           state:     '판매중'
         })));
-      })
-      .catch(console.error);
+      } catch (err) {
+        console.error('상품 목록 불러오기 실패:', err);
+      }
+    };
+
+    loadData();
 
     setDummyItems(dummyProducts.map(d => ({
       id:        d.id + 1000,
@@ -89,7 +96,7 @@ export default function ProductPage() {
       condition: d.condition,
       state:     d.trade_type === '직거래' ? '판매중' : '판매완료'
     })));
-  }, []);
+  }, [search]); // refresh=1 감지
 
   /* ── 검색 입력 핸들러 ── */
     /* ── 검색창 onChange → 공백이면 검색어 초기화 ── */
@@ -146,6 +153,8 @@ export default function ProductPage() {
     // }, [productItems, categories, brands, conditions, states, priceMin, priceMax, searchTerm]);
     const filteredApi   = useMemo(() => applyFilter(apiItems), [apiItems,   applyFilter]);
     const filteredDummy = useMemo(() => applyFilter(dummyItems), [dummyItems, applyFilter]);
+
+    const combinedItems = useMemo(() => [...filteredApi, ...filteredDummy], [filteredApi, filteredDummy]); // 합치기
 
   return (
     <>
@@ -305,24 +314,9 @@ export default function ProductPage() {
         </div>
 
         {/* ── 상품 리스트 ── */}
-        {/* 내가 등록한 상품 (DB) */}
+        {/* 내가 등록한 상품 (DB) + 더미 상품 */}
         <ul className="productpage_items_list">
-          {filteredApi.map(it=>(
-            <ItemCard2
-              key={it.id}
-              id={it.id}
-              imgSrc={it.imageUrl}
-              brand={it.brand}
-              name={it.name}
-              price={`${it.price.toLocaleString()}원`}
-              time={it.datetime}
-            />
-          ))}
-        </ul>
-
-        {/* 더미 상품 */}
-        <ul className="productpage_items_list">
-          {filteredDummy.map(it=>(
+          {combinedItems.map(it=>(
             <ItemCard2
               key={it.id}
               id={it.id}
@@ -338,3 +332,5 @@ export default function ProductPage() {
     </>
   );
 }
+
+// GPT를 통해 useMemo 종속성 연결, 상품 등록 후 미갱신으로 인한 미출력 해결
