@@ -23,6 +23,7 @@ import MemberUpdate from './components/MemberUpdate';
 import InquiryForm from './components/InquiryForm';
 import Qna from './components/Qna';
 import GoodsEdit from './components/GoodsEdit'; /* 상품 수정 */
+import DummyItemDetail from './components/DummyItemDetail'; // 더미 상세보기(JSON파일)
 // import OtherPage from './components/OtherPage';  // 필요하다면 추가
 
 function App() {
@@ -55,6 +56,9 @@ function App() {
 
           {/* 회원정보 수정 */}
           <Route path="/member/update/:id" element={<MemberUpdate />} />
+
+          {/* 더미 제품 */}
+          <Route path="/products/:id" element={<DummyItemDetail />} />
 
           {/* <Route path="/other" element={<OtherPage />} /> */}
         </Routes>
