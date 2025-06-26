@@ -116,8 +116,8 @@ function GoodsInsert() {
   
     const fd = new FormData();
     fd.append('title', title);
-    fd.append('brand', brand);
     fd.append('kind', category);         
+    fd.append('brand', brand);
     fd.append('price', price);
     fd.append('tradeType', tradeType);
     fd.append('condition', condition);
