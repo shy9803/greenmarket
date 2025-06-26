@@ -6,8 +6,6 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCamera, faChevronLeft, faChevronRight } from '@fortawesome/free-solid-svg-icons';
 import axios from 'axios';
 
-// import Region from './Region.js';
-
 function GoodsInsert() {
   const navigate = useNavigate();
 
@@ -20,17 +18,17 @@ function GoodsInsert() {
     }
   }, [navigate]);
 
-  //폼 상태 관리
+  // 폼 상태 관리
   const [formData, setFormData] = useState({
     title: '',
-    category: '',
+    kind: '',
     brand: '',
     price: '',
     tradeType: '',
     condition: '',
     region: '',
     description: '',
-    shipping_fee: ''  // 추가
+    shipping_fee: ''
   });
 
   // DataURL 미리보기
@@ -92,9 +90,10 @@ function GoodsInsert() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const { title, category, brand, price, tradeType, condition, region, description, shipping_fee } = formData;
-  
-    if (!title || !category || !brand || !price || !tradeType || !condition || !region || !description || !shipping_fee) {
+    const { title, kind, brand, price, tradeType, condition, region, description, shipping_fee } = formData;
+
+    // 유효성 검사
+    if (!title || !kind || !brand || !price || !tradeType || !condition || !region || !description || !shipping_fee) {
       alert('모든 항목을 입력해주세요.');
       return;
     }
@@ -106,49 +105,51 @@ function GoodsInsert() {
       alert('배송비는 숫자로 입력해주세요.');
       return;
     }
-  
-    const token = localStorage.getItem('token');  // 로그인 때 저장한 토큰을 꺼냄
+
+    const token = localStorage.getItem('token');
     if (!token) {
       alert('로그인이 필요합니다.');
-      navigate('/login');  // 로그인 페이지로 이동시키기
+      navigate('/login');
       return;
     }
-  
+
+    // FormData 셋업
     const fd = new FormData();
     fd.append('title', title);
-    fd.append('kind', category);         
     fd.append('brand', brand);
+    fd.append('kind', kind);
     fd.append('price', price);
-    fd.append('tradeType', tradeType);
+    fd.append('trade_type', tradeType);
     fd.append('condition', condition);
     fd.append('region', region);
     fd.append('description', description);
     fd.append('shipping_fee', shipping_fee);
-  
+
     Object.entries(imageFiles).forEach(([idx, file]) => {
       const field = idx === '0' ? 'image_main' : `image_${idx}`;
       fd.append(field, file);
     });
-  
+
     try {
       const res = await axios.post('https://port-0-backend-mbiobig1cd0dc4c0.sel4.cloudtype.app/products', fd, {
         headers: {
-          'Content-Type': 'multipart/form-data',
-          Authorization: `Bearer ${token}`,  // 여기 토큰을 꼭 넣어주세요
-        },
+          Authorization: `Bearer ${token}`,
+          'Content-Type': 'multipart/form-data'
+        }
       });
-      if (res.data.success) {
-        alert('등록이 완료되었습니다.');
-        navigate('/');
-      }
+      alert('상품이 정상적으로 등록되었습니다!');
+      console.log('상품 등록 성공:', res.data);
+      navigate('/productpage');
     } catch (err) {
       console.error('Axios Error:', err.response?.data || err.message);
-      alert('등록 중 오류가 발생했습니다.');
+      alert(`등록 실패: ${err.response?.data?.error || err.message}`);
     }
   };
 
   const handleCancel = () => {
-    if (window.confirm('작성을 취소하시겠습니까?')) navigate('/');
+    if (window.confirm('작성을 취소하시겠습니까?')) {
+      navigate('/');
+    }
   };
 
   return (
@@ -171,12 +172,12 @@ function GoodsInsert() {
 
         {/* 카테고리 */}
         <p>
-          <label htmlFor="category">카테고리</label>
+          <label htmlFor="kind">카테고리</label>
           <select
-            name="category"
-            id="category"
+            name="kind"
+            id="kind"
             required
-            value={formData.category}
+            value={formData.kind}
             onChange={handleChange}
           >
             <option value="">제품선택</option>
@@ -217,7 +218,7 @@ function GoodsInsert() {
           </select>
         </p>
 
-        {/* 사진 */}
+        {/* 사진 업로드 */}
         <label htmlFor="image">사진</label>
         <div className="photo-section">
           {/* 메인 사진 */}
@@ -260,13 +261,13 @@ function GoodsInsert() {
                       }}>
                       {src
                         ? <img src={src} alt={`사진 ${actual}`} className="thumbnail-preview" style={{
-                            width: '100%', height: '100%', objectFit: 'cover'
-                          }} />
+                          width: '100%', height: '100%', objectFit: 'cover'
+                        }} />
                         : <FontAwesomeIcon icon={faCamera} style={{
-                            fontSize: '32px', color: '#555',
-                            position: 'absolute', top: '50%', left: '50%',
-                            transform: 'translate(-50%, -50%)'
-                          }} />
+                          fontSize: '32px', color: '#555',
+                          position: 'absolute', top: '50%', left: '50%',
+                          transform: 'translate(-50%, -50%)'
+                        }} />
                       }
                       <input
                         type="file"
@@ -286,7 +287,7 @@ function GoodsInsert() {
           </div>
         </div>
 
-        {/* 가격 */}
+        {/* 가격 입력 */}
         <p>
           <label htmlFor="price">가격</label>
           <input
@@ -345,9 +346,9 @@ function GoodsInsert() {
             value={formData.region}
             onChange={handleChange}
           />
-          {/* <Region /> */}
         </p>
 
+        {/* 배송비 */}
         <p>
           <label htmlFor="shipping_fee">배송비</label>
           <input
@@ -374,7 +375,7 @@ function GoodsInsert() {
           />
         </p>
 
-        {/* 버튼 */}
+        {/* 버튼 그룹 */}
         <div className="button-group">
           <button type="submit" className="submit-btn">등록하기</button>
           <button type="button" className="cancel-btn" onClick={handleCancel}>취소</button>
