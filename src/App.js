@@ -22,6 +22,7 @@ import NoticeDetail from './components/NoticeDetail';
 import MemberUpdate from './components/MemberUpdate';
 import InquiryForm from './components/InquiryForm';
 import Qna from './components/Qna';
+import GoodsEdit from './components/GoodsEdit'; /* 상품 수정 */
 // import OtherPage from './components/OtherPage';  // 필요하다면 추가
 
 function App() {
@@ -42,6 +43,7 @@ function App() {
           <Route path="/itemdetail" element={<ItemDetail />} />
           <Route path="/goodsinsert" element={<GoodsInsert />} />
           <Route path="/products/:id" element={<ItemDetail />} />
+          <Route path="/products/edit/:id" element={<GoodsEdit />} />
 
           {/* 고객센터 */}
           <Route path="/notice" element={<Notice />} />
