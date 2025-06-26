@@ -62,7 +62,7 @@ export default function ProductPage() {
   /* ── 컴포넌트 마운트 시 DB 에서 상품 불러오기 ── */
   // 데이터 로드: API + 더미
   useEffect(() => {
-    axios.get(`${BASE_URL}/greenmarket/products`)
+    axios.get(`${BASE_URL}/products`)
       .then(res => {
         setApiItems(res.data.map(p => ({
           id:        p.id,
