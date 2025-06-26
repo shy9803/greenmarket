@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Link} from 'react-router-dom';
 import axios from 'axios';
 
-import '../style/LogForm.css'
+import '../style/LogForm.css';
 
 function Login(props) {
   const [form, setForm] = useState({

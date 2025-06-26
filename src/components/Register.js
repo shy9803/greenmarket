@@ -5,6 +5,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronDown, faChevronUp } from '@fortawesome/free-solid-svg-icons';
 
 import Region from './Region'; // 지역 선택 별도 연결
+import '../style/LogForm.css';
 
 function Register(props) {
   const [form, setForm] = useState({
@@ -145,14 +146,14 @@ function Register(props) {
               {isOpen ? <FontAwesomeIcon icon={faChevronUp}></FontAwesomeIcon> : <FontAwesomeIcon icon={faChevronDown}></FontAwesomeIcon>}
             </span>
             {/* 조건 ? (참) 위화살(=펼쳤을때) : (거짓) 아래화살(=접혔을때) */}
+
+            <div style={{height: isOpen ? '220px' : '0'}} className='logform_agree_wrap'>
+              {isOpen && 
+              <textarea cols='73' rows='10' readOnly id='logform_agreetxt' name='agreetxt' value={text}>
+              </textarea>} {/* 텍스트 파일 불러오기로 입력 */}
+            </div>
           </div>
-          <div style={{height: isOpen ? '220px' : '0', overflow: 'hidden', transition: 'height 0.3s ease'}}>
-          {isOpen && 
-          <textarea cols='73' rows='10' readOnly id='logform_agreetxt' name='agreetxt' value={            text}>
-            {/* 텍스트 파일 불러오기로 입력 */}
-          </textarea>}
-          </div>
-          
+
           <p>
             <input type='submit' value='회원가입' />
           </p>
