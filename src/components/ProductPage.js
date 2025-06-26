@@ -307,7 +307,7 @@ function ProductPage() {
             <ItemCard2
               key={it.id}
               id={it.id}
-              imgSrc={`http://localhost:9070/uploads/${it.image}`}
+              imgSrc={`https://port-0-backend-mbiobig1cd0dc4c0.sel4.cloudtype.app/uploads/${it.image}`}
               brand={it.brand}
               name={it.name}
               price={`${it.price.toLocaleString()}원`}
