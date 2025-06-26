@@ -44,7 +44,7 @@ function GoodsEdit() {
     const fetchProduct = async () => {
       try {
         const res = await axios.get(`https://port-0-backend-mbiobig1cd0dc4c0.sel4.cloudtype.app/products/${id}`);
-        console.log("응답 데이터:", res.data);
+        // console.log("응답 데이터:", res.data);
         const data = res.data; 
 
         setFormData({
@@ -385,13 +385,7 @@ function GoodsEdit() {
                   onChange={handleChange}
                 />
               </p>
-      
-              {/* 첨부파일(기존 그대로) */}
-              <p>
-                <label htmlFor="file">첨부파일</label>
-                <input type="file" id="file" name="file" />
-              </p>
-      
+
               {/* 버튼 */}
               <div className="button-group">
                 <button type="submit" className="submit-btn">수정하기</button>

@@ -13,6 +13,7 @@ function ItemDetail() {
   const [item, setItem] = useState(null);
   const [sellerProducts, setSellerProducts] = useState([]);
   const [categoryProducts, setCategoryProducts] = useState([]);
+  const [showCartModal, setShowCartModal] = useState(false);
 
   const token = localStorage.getItem('token');
   let loggedUserId = null;
@@ -146,14 +147,16 @@ function ItemDetail() {
                       { product_id: item.id },
                       { headers: { Authorization: `Bearer ${token}` } }
                     )
-                      .then(() => alert('장바구니에 추가되었습니다.'))
-                      .catch(error => {
-                        const status = error.response?.status;
-                        const msg = error.response?.data?.error || '오류가 발생했습니다.';
-                        if (status === 400) alert(msg);
-                        else if (status === 401) alert('로그인이 필요합니다.');
-                        else alert(msg);
-                      });
+                    .then(() => {
+                      setShowCartModal(true); // 모달 열기
+                    }) // 해당부분 수정
+                    .catch(error => {
+                      const status = error.response?.status;
+                      const msg = error.response?.data?.error || '오류가 발생했습니다.';
+                      if (status === 400) alert(msg);
+                      else if (status === 401) alert('로그인이 필요합니다.');
+                      else alert(msg);
+                    });
                   }}
                 >장바구니 추가</button>
               </li>
@@ -182,13 +185,13 @@ function ItemDetail() {
       <div className="seller_products_section">
         <h3 style={{textAlign:'left', lineHeight:'100px', width:'1200px', margin:'0 auto'}}><span style={{fontWeight:'bold', fontSize:'20px'}}>{item.seller_name}</span>님의 다른 상품</h3>
         <div className="product_list_grid"  style={{
-    display: 'flex',
-    flexWrap: 'wrap',
-    gap: '20px',
-    marginTop: '10px',
-    width:'1200px',
-    margin:'0 auto',
-  }}>
+          display: 'flex',
+          flexWrap: 'wrap',
+          gap: '20px',
+          marginTop: '10px',
+          width:'1200px',
+          margin:'0 auto',
+        }}>
           {sellerProducts.length > 0 ? (
             sellerProducts.map(p => (
               <ItemCard2
@@ -210,13 +213,13 @@ function ItemDetail() {
       <div className="category_products_section">
         <h3 style={{textAlign:'left', lineHeight:'100px', width:'1200px', margin:'0 auto'}}>카테고리가 같은 다른 상품</h3>
         <div className="product_list_grid" style={{
-     display: 'flex',
-     flexWrap: 'wrap',
-     gap: '20px',
-     marginTop: '10px',
-     width:'1200px',
-     margin:'0 auto',
-  }}>
+          display: 'flex',
+          flexWrap: 'wrap',
+          gap: '20px',
+          marginTop: '10px',
+          width:'1200px',
+          margin:'0 auto',
+        }}>
           {categoryProducts.length > 0 ? (
             categoryProducts.map(p => (
               <ItemCard2
@@ -234,6 +237,19 @@ function ItemDetail() {
           )}
         </div>
       </div>
+
+      {/* 쇼핑계속하기 묻는 모달창 */}
+      {showCartModal && (
+        <div className="modal-overlay">
+          <div className="modal-content">
+            <p>장바구니에 추가되었습니다!</p>
+            <div className="modal-buttons">
+              <button onClick={() => navigate('/cart')}>장바구니로 이동</button>
+              <button onClick={() => setShowCartModal(false)}>쇼핑 계속하기</button>
+            </div>
+          </div>
+        </div>
+      )}
     </>
   );
 }

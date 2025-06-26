@@ -138,10 +138,9 @@ function GoodsInsert() {
         },
       });
       alert('상품이 정상적으로 등록되었습니다!');
-      console.log('상품 등록 성공:', res.data);
+      // console.log('상품 등록 성공:', res.data);
       navigate('/productpage');
     } catch (err) {
-      console.error('Axios Error:', err.response?.data || err.message);
       console.error('Axios Error:', err.response?.data || err.message);
       alert(`등록 실패: ${err.response?.data?.error || err.message}`);
     }
