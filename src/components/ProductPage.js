@@ -87,8 +87,8 @@ export default function ProductPage() {
 
     setDummyItems(dummyProducts.map(d => ({
       id:        d.id + 1000,
-      // imageUrl:  `${process.env.PUBLIC_URL}/images/${d.images[0]}`,
-      imageUrl:  `/images/${d.images[0]}`, // Netlify 배포로 인하여 변경
+      imageUrl:  `${process.env.PUBLIC_URL}/images/${d.images[0]}`,
+      // imageUrl:  `/images/${d.images[0]}`, // Netlify 배포로 인하여 변경
       brand:     d.brand,
       name:      d.title,
       price:     d.price,
