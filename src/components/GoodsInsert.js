@@ -374,12 +374,6 @@ function GoodsInsert() {
           />
         </p>
 
-        {/* 첨부파일(기존 그대로) */}
-        <p>
-          <label htmlFor="file">첨부파일</label>
-          <input type="file" id="file" name="file" />
-        </p>
-
         {/* 버튼 */}
         <div className="button-group">
           <button type="submit" className="submit-btn">등록하기</button>
