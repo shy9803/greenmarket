@@ -315,7 +315,7 @@ export default function ProductPage() {
 
         {/* ── 상품 리스트 ── */}
         {/* 내가 등록한 상품 (DB) + 더미 상품 */}
-        <ul className="productpage_items_list">
+        {/* <ul className="productpage_items_list">
           {combinedItems.map(it=>(
             <ItemCard2
               key={it.id}
@@ -327,10 +327,10 @@ export default function ProductPage() {
               time={it.datetime}
             />
           ))}
-        </ul>
+        </ul> */}
         
         {/* 내가 등록한 상품 (DB) */}
-        {/* <ul className="productpage_items_list">
+        <ul className="productpage_items_list">
           {filteredApi.map(it=>(
             <ItemCard2
               key={it.id}
@@ -342,10 +342,10 @@ export default function ProductPage() {
               time={it.datetime}
             />
           ))}
-        </ul> */}
+        </ul>
 
         {/* 더미 상품 */}
-        {/* <ul className="productpage_items_list">
+        <ul className="productpage_items_list">
           {filteredDummy.map(it=>(
             <ItemCard2
               key={it.id}
@@ -357,7 +357,7 @@ export default function ProductPage() {
               time={it.datetime}
             />
           ))}
-        </ul> */}
+        </ul>
       </div>
     </>
   );
