@@ -10,6 +10,9 @@ import Slide from './Slide';
 import ItemCard2 from './ItemCard2';
 import dummyProducts from '../data/dummyProducts.json'; // 더미 상품
 
+// URL 주소 (유지보수성 탁월)
+const BASE_URL = 'https://port-0-backend-mbioc25168a38ca1.sel4.cloudtype.app';
+
 /* ▸ 필터용 상수 (원본 그대로) */
 const CATEGORY = [
   '여성의류', '남성의류', '가방', '신발',
@@ -25,75 +28,74 @@ const SALESTATE = ['판매중', '판매완료'];
 
 function ProductPage() {
   const navigate = useNavigate();
-    const { search } = useLocation();
-  
-    /* ── 기존 상태 (필터/검색) ── */
-    const [openKey, setOpenKey]       = useState(null);
-    const [categories, setCategories] = useState([]);
-    const [brands, setBrands]         = useState([]);
-    const [conditions, setConditions] = useState([]);
-    const [states, setStates]         = useState([]);
-    const [priceMin, setPriceMin]     = useState('');
-    const [priceMax, setPriceMax]     = useState('');
-  
-    /* ── 검색어 상태 ── */
-    const [searchInput, setSearchInput] = useState('');
-    const [searchTerm, setSearchTerm]   = useState('');
-  
-    /* ── 가격 입력 상태 (적용 전) ── */
-    const [tempPriceMin, setTempPriceMin] = useState('');
-    const [tempPriceMax, setTempPriceMax] = useState('');
-  
-    /* ── DB 연동 상태 ── */
-    const [productItems, setProductItems] = useState([]);  // API 로 받은 상품 리스트
-  
-    /* ── 배열 토글 헬퍼 ── */
-    const toggleArray = (v, setter) => setter(prev => prev.includes(v) ? prev.filter(i => i !== v) : [...prev, v]);
-  
-    /* ── URL 파라미터(keyword) 처리 ── */
-    useEffect(() => {
-      const qp = new URLSearchParams(search);
-      const kw = qp.get('keyword') || '';
-      if (kw) {
-        setSearchInput(kw);
-        setSearchTerm(kw);
-      }
-    }, [search]);
+  const { search } = useLocation();
+
+  /* ── 기존 상태 (필터/검색) ── */
+  const [openKey, setOpenKey]       = useState(null);
+  const [categories, setCategories] = useState([]);
+  const [brands, setBrands]         = useState([]);
+  const [conditions, setConditions] = useState([]);
+  const [states, setStates]         = useState([]);
+  const [priceMin, setPriceMin]     = useState('');
+  const [priceMax, setPriceMax]     = useState('');
+
+  /* ── 검색어 상태 ── */
+  const [searchInput, setSearchInput] = useState('');
+  const [searchTerm, setSearchTerm]   = useState('');
+
+  /* ── 가격 입력 상태 (적용 전) ── */
+  const [tempPriceMin, setTempPriceMin] = useState('');
+  const [tempPriceMax, setTempPriceMax] = useState('');
+
+  // ── 상품 데이터 ──
+  const [apiItems, setApiItems]     = useState([]);
+  const [dummyItems, setDummyItems] = useState([]); 
+  /* ── DB 연동 상태 ── */
+  // const [productItems, setProductItems] = useState([]);  // API 로 받은 상품 리스트
+
+  /* ── 배열 토글 헬퍼 ── */
+  const toggleArray = (v, setter) => setter(prev => prev.includes(v) ? prev.filter(i => i !== v) : [...prev, v]);
+
+  /* ── URL 파라미터(keyword) 처리 ── */
+  useEffect(() => {
+    const qp = new URLSearchParams(search);
+    const kw = qp.get('keyword') || '';
+    // if (kw) {
+      setSearchInput(kw);
+      setSearchTerm(kw);
+    // }
+  }, [search]);
 
   /* ── 컴포넌트 마운트 시 DB 에서 상품 불러오기 ── */
+  // 데이터 로드: API + 더미
   useEffect(() => {
-    axios.get('https://port-0-backend-mbiobig1cd0dc4c0.sel4.cloudtype.app/products')
+    axios.get(`${BASE_URL}/greenmarket/products`)
       .then(res => {
-        // 실 DB 상품
-        const apiItems = res.data.map(p => ({
+        setApiItems(res.data.map(p => ({
           id:        p.id,
-          image:     p.images[0] || '',           // 첫 번째 이미지 파일명
+          imageUrl:  `${BASE_URL}/uploads/${p.images[0] || ''}`,
           brand:     p.brand,
           name:      p.title,
           price:     p.price,
-          // time: new Date(p.datetime).toLocaleString(),   // 등록일시
           datetime:  p.datetime,
           category:  p.kind,
           condition: p.condition,
-          state:     p.status === 'available' ? '판매완료' : '판매중',
-        }));
-        
-        // 더미 상품
-        const dummyItems = dummyProducts.map(d => ({
-          id:        d.id + 1000,
-          image:     d.images[0],
-          brand:     d.brand,
-          name:      d.title,
-          price:     d.price,
-          datetime:  new Date().toISOString(),
-          category:  d.kind,
-          condition: d.condition,
-          state:     d.trade_type === '직거래' ? '판매중' : '판매완료'
-        }));
-        // 머지 (더미 먼저, 최신 등록 DB 상품이 상단)
-        setProductItems([...dummyItems, ...apiItems]);
+          state:     '판매중'
+        })));
       })
       .catch(console.error);
+
+    setDummyItems(dummyProducts.map(d => ({
+      id:        d.id + 1000,
+      imageUrl:  `${process.env.PUBLIC_URL}/images/${d.images[0]}`,
+      brand:     d.brand,
+      name:      d.title,
+      price:     d.price,
+      datetime:  new Date().toISOString(),
+      category:  d.kind,
+      condition: d.condition,
+      state:     d.trade_type === '직거래' ? '판매중' : '판매완료'
+    })));
   }, []);
 
   /* ── 검색 입력 핸들러 ── */
@@ -114,37 +116,38 @@ function ProductPage() {
         const v = e.target.value.trim();
         setSearchInput(v);
         setSearchTerm(v);
-        navigate(v
-          ? `/productpage?keyword=${encodeURIComponent(v)}`
-          : '/productpage'
-        );
+        navigate(v ? `/productpage?keyword=${encodeURIComponent(v)}` : '/productpage');
       }
     };
   
     /* ── 필터 & 검색 적용 ── */
-    const filtered = useMemo(() => {
-      return productItems.filter(it => {
-        if (categories.length && !categories.includes(it.category)) return false;
-        if (brands.length && !brands.includes(it.brand)) return false;
-        if (conditions.length && !conditions.includes(it.condition)) return false;
-        if (states.length && !states.includes(it.state)) return false;
-        // if (priceMin && it.price < Number(priceMin)) return false;
-        // if (priceMax && it.price > Number(priceMax)) return false;
-        if (priceMin && it.price < +priceMin) return false;
-        if (priceMax && it.price > +priceMax) return false;
-  
-        // ★ 여기부터 검색어 체크: title(name), brand, category 모두 검사
-        if (searchTerm) {
-          const kw = searchTerm.toLowerCase();
-          const inName = it.name.toLowerCase().includes(kw);
-          const inBrand = it.brand?.toLowerCase().includes(kw);
-          const inKind = it.category?.toLowerCase().includes(kw);
-          if (! (inName || inBrand || inKind) ) return false;
-        }
-  
-        return true;
-      });
-    }, [productItems, categories, brands, conditions, states, priceMin, priceMax, searchTerm]);
+    // const filtered = useMemo(() => {
+    //   return productItems.filter(it => {
+    const applyFilter = list => list.filter(it => {
+      if (categories.length && !categories.includes(it.category)) return false;
+      if (brands.length && !brands.includes(it.brand)) return false;
+      if (conditions.length && !conditions.includes(it.condition)) return false;
+      if (states.length && !states.includes(it.state)) return false;
+      // if (priceMin && it.price < Number(priceMin)) return false;
+      // if (priceMax && it.price > Number(priceMax)) return false;
+      if (priceMin && it.price < +priceMin) return false;
+      if (priceMax && it.price > +priceMax) return false;
+
+      // ★ 여기부터 검색어 체크: title(name), brand, category 모두 검사
+      if (searchTerm) {
+        const kw = searchTerm.toLowerCase();
+        // const inName = it.name.toLowerCase().includes(kw);
+        // const inBrand = it.brand?.toLowerCase().includes(kw);
+        // const inKind = it.category?.toLowerCase().includes(kw);
+        // if (! (inName || inBrand || inKind) ) return false;
+        if (![it.name, it.brand, it.category].some(f => f?.toLowerCase().includes(kw))) return false;
+      }
+      return true;
+    });
+
+    // }, [productItems, categories, brands, conditions, states, priceMin, priceMax, searchTerm]);
+    const filteredApi   = useMemo(() => applyFilter(apiItems),   [apiItems,   categories, brands, conditions, states, priceMin, priceMax, searchTerm]);
+    const filteredDummy = useMemo(() => applyFilter(dummyItems), [dummyItems, categories, brands, conditions, states, priceMin, priceMax, searchTerm]);
 
   return (
     <>
@@ -181,7 +184,7 @@ function ProductPage() {
               {CATEGORY.map(c => (
                 <li
                   key={c}
-                  className={categories.includes(c)?'on':''}
+                  className={categories.includes(c) ? 'on' : ''}
                   onClick={() => toggleArray(c, setCategories)}
                 >{c}</li>
               ))}
@@ -212,12 +215,14 @@ function ProductPage() {
                 type="number" placeholder="최소"
                 value={tempPriceMin}
                 onChange={e => setTempPriceMin(e.target.value)}
+                maxLength='10'
               />
               <span>&#126;</span>
               <input
                 type="number" placeholder="최대"
                 value={tempPriceMax}
                 onChange={e => setTempPriceMax(e.target.value)}
+                maxLength='10'
               />
               <button
                 className={(tempPriceMin && tempPriceMax) ? 'active' : ''}
@@ -302,16 +307,32 @@ function ProductPage() {
         </div>
 
         {/* ── 상품 리스트 ── */}
+        {/* 내가 등록한 상품 (DB) */}
         <ul className="productpage_items_list">
-          {filtered.map(it => (
+          {filteredApi.map(it=>(
             <ItemCard2
               key={it.id}
               id={it.id}
-              imgSrc={`https://port-0-backend-mbiobig1cd0dc4c0.sel4.cloudtype.app/uploads/${it.image}`}
+              imgSrc={it.imageUrl}
               brand={it.brand}
               name={it.name}
               price={`${it.price.toLocaleString()}원`}
-              time={it.time}
+              time={it.datetime}
+            />
+          ))}
+        </ul>
+
+        {/* 더미 상품 */}
+        <ul className="productpage_items_list">
+          {filteredDummy.map(it=>(
+            <ItemCard2
+              key={it.id}
+              id={it.id}
+              imgSrc={it.imageUrl}
+              brand={it.brand}
+              name={it.name}
+              price={`${it.price.toLocaleString()}원`}
+              time={it.datetime}
             />
           ))}
         </ul>

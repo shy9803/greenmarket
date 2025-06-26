@@ -38,10 +38,8 @@ function ItemDetail() {
   useEffect(() => {
     axios.get(`${BASE_URL}/products/${id}`)
       .then(res => {
-        // const product = res.data;
-        // setItem(product);
-
-        setItem(res.data);
+        const product = res.data;
+        setItem(product);
 
         const ownerId = product.owner_id;
 
