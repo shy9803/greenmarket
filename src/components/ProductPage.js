@@ -154,7 +154,7 @@ export default function ProductPage() {
     const filteredApi   = useMemo(() => applyFilter(apiItems), [apiItems,   applyFilter]);
     const filteredDummy = useMemo(() => applyFilter(dummyItems), [dummyItems, applyFilter]);
 
-    const combinedItems = useMemo(() => [...filteredApi, ...filteredDummy], [filteredApi, filteredDummy]); // 합치기
+    //const combinedItems = useMemo(() => [...filteredApi, ...filteredDummy], [filteredApi, filteredDummy]); // 합치기
 
   return (
     <>
