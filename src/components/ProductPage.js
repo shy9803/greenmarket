@@ -88,7 +88,6 @@ export default function ProductPage() {
     setDummyItems(dummyProducts.map(d => ({
       id:        d.id + 1000,
       imageUrl:  `${process.env.PUBLIC_URL}/images/${d.images[0]}`,
-      // imageUrl:  `/images/${d.images[0]}`, // Netlify 배포로 인하여 변경
       brand:     d.brand,
       name:      d.title,
       price:     d.price,
@@ -329,6 +328,36 @@ export default function ProductPage() {
             />
           ))}
         </ul>
+        
+        {/* 내가 등록한 상품 (DB) */}
+        {/* <ul className="productpage_items_list">
+          {filteredApi.map(it=>(
+            <ItemCard2
+              key={it.id}
+              id={it.id}
+              imgSrc={it.imageUrl}
+              brand={it.brand}
+              name={it.name}
+              price={`${it.price.toLocaleString()}원`}
+              time={it.datetime}
+            />
+          ))}
+        </ul> */}
+
+        {/* 더미 상품 */}
+        {/* <ul className="productpage_items_list">
+          {filteredDummy.map(it=>(
+            <ItemCard2
+              key={it.id}
+              id={it.id}
+              imgSrc={it.imageUrl}
+              brand={it.brand}
+              name={it.name}
+              price={`${it.price.toLocaleString()}원`}
+              time={it.datetime}
+            />
+          ))}
+        </ul> */}
       </div>
     </>
   );
