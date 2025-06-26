@@ -22,7 +22,10 @@ function Cart({ token }) {
           { headers: { Authorization: `Bearer ${actualToken}` } }
         );
 
-        const cartWithChecked = res.data.map(item => ({ ...item, checked: false }));
+        // ★ 여기서 item.id 를 item.cart_id 로 복제해 줍니다.
+        const cartWithChecked = res.data.map(item => ({ ...item, 
+          cart_id: item.id, // 서버가 내려준 id를 cart_id 필드에 복사
+          checked: false }));
         setProductData(cartWithChecked);
       } catch (err) {
         console.error('장바구니 데이터를 불러오는데 실패했습니다.', err);
