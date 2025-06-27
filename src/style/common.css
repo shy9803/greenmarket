@@ -48,8 +48,9 @@ a {
 /* 로고 */
 .header_logo {
   width: 180px;
-  height: 100%;
+  /* height: 100%; */
 }
+.header_logo a {display: inline-block; width: 100%; height: 100%;}
 .header_logo img {
   width: 100%;
   /* width: 180px;
@@ -62,7 +63,7 @@ a {
   position: absolute;
   left: 50%;
   top: 50%;
-  height: 50%;
+  /* height: 50%; */
   transform: translate(-50%, -50%);
   width: 100%;
   max-width: 400px; /* = 33.3% (기존 너비값) */
@@ -72,7 +73,7 @@ a {
 }
 .header_search_wrap input {
   border-radius: 50px;
-  border: 1px solid var(--m_color_g);
+  border: 1px solid var(--m_color_g); /* #156615 */
   /* text-indent: 35px; */
   /* padding: 5px; */
   text-indent: 5px;
@@ -80,9 +81,10 @@ a {
   box-sizing: border-box;
   width: 100%; /* = 400px */
 }
-/* .header_search_wrap input:focus {
+.header_search_wrap input:focus {
   outline: none;
-} */
+  border: 1px solid var(--m_color_g); /* #156615 */
+}
 .header_search-icon {
   position: absolute;
   top: 5px;
@@ -90,6 +92,13 @@ a {
   color: var(--m_color_g); /* #156615 */
   background: none;
   border: none;
+}
+
+/* 로그인 정보 */
+.header_user_info {
+  position: absolute;
+  top: 10px;
+  right: 0;
 }
 
 /* 상단 메뉴 */
@@ -110,21 +119,25 @@ a {
 }
 
 /* 상단 메뉴 - 로그인 유저 이름 */
-.header_lnb_wrap li .header_username {
+.header_user_info .header_username {
   font-weight: bold;
   color: var(--m_color_g); /* #156615 */
 }
 
 /* 상단 메뉴 - 로그아웃 버튼 */
-.header_lnb_wrap li button { /* 인라인 스타일 이동 */
+.header_user_info button { /* 인라인 스타일 이동 */
   background: none;
   border: none;
   cursor: pointer;
   color: var(--m_color_g); /* #156615 */
   padding: 0;
   font-size: 1em;
-  display: flex;
+  /* display: flex; */
   align-items: center;
+  margin: 0 10px;
+}
+.header_user_info button svg {
+  margin-right: 5px;
 }
 
 /* 하단 메뉴 */
@@ -142,11 +155,6 @@ a {
   font-weight: bold;
 }
 
-/* 모바일 메뉴 */
-.mobile_menu_icon {
-  font-size: 26px !important;
-  color: var(--s_color_bk) !important; /* #333 */
-}
 /* 각 메뉴 항목 스타일 
 .mobile_menu li {
   padding: 10px;
@@ -240,6 +248,7 @@ footer{
 .fixed_mobile_footer .footer_btn{display: none;}
 
 /* ────────── 메인 섹션 ────────── */
+/* 컴포넌트별 여백 */
 .main_section {
   margin: 100px auto;
 }
@@ -290,25 +299,31 @@ footer{
     display: flex;
     align-items: center;
     justify-content: space-between;
-    height: 105px; /* = PC,tablet 동일 (공유: 110px) */
+    height: 100px; /* = PC,tablet 동일 (공유: 110px) */
   }
-  .header_logo {
+
+  /* 헤더 로고 */
+  /*.header_logo {
     width: 120px;
-  }
-  .header_logo img {
+    height: 100%; /* 헤더 범위 내 위치하도록 */
+  /* } */
+  /*.header_logo img {*/
     /* width: 120px;
     height: 43px; 
     margin-top: 0; */
-    width: 100%;
-  }
+    /* width: 100%;
+  } */
 
-  .header_search-icon {
+  /* 검색창 */
+  /* .header_search-icon {
     display: inline-block;
-    /* position: absolute; */
-  }
+    position: absolute;
+  } */
 
   /* LNB, GNB 한 줄 flex */
   /* LNB(nav 로그인/장바구니/로그아웃/CS) - 위에 */
+
+  /* 헤더 상단 메뉴 */
   .header_lnb_wrap {
     display: flex;
     justify-content: flex-end;
@@ -369,6 +384,10 @@ footer{
     position: relative;
   }
 
+  .header_logo {
+    width: 80%;
+  }
+
   /* 헤더 검색창 */
   .header_search_wrap {
     /* position: static; */
@@ -391,9 +410,9 @@ footer{
 
   /* 헤더 상단 메뉴 */
   .header_lnb_wrap {
-    order: 3;
+    order: 4; /* 전: 3 */
     /* width: 100%; */
-    margin: -20px 0;
+    margin: -4px 0; /* 전: -20px 0 */
   }
   .header_lnb_wrap ul {
     display: flex;
@@ -401,7 +420,7 @@ footer{
 
   /* GNB(nav 메뉴) - 아래에 */
   .header_gnb_wrap {
-    order: 4;
+    order: 5; /* 전: 4 */
     width: 100%;
     display: flex;
     justify-content: flex-end;
@@ -413,7 +432,7 @@ footer{
   }
   .header_gnb_wrap li {
     padding: 0 12px;
-    font-size: var(--s_font); /* 14px */
+    /* font-size: var(--s_font); /* 14px */
   }
 
   /* 푸터 */
@@ -460,11 +479,17 @@ footer{
     z-index: 100;
   }
 
-  /* 모바일 토글 메뉴 */
+  /* 헤더 로고 서식 변경 */
+  .header_logo {width: 100%;}
+  .header_logo a {width: 50%;}
+  .header_logo img {margin: 22px 0;}
+
+  /* 모바일 메뉴 (검색창 및 토글메뉴) */
   .mobile_menu_wrap { /* 공유: .mobile_menu_btn */
-    position: absolute;
+    /* position: absolute;
     top: 31px;
-    right: 10px;
+    right: 10px; */
+    position: relative;
     /* display: inline-block; */
     /* border: none; */
     /* padding: 10px 10px; */
@@ -473,20 +498,51 @@ footer{
     display: flex;
     align-items: center;
   }
+
+  /* 모바일용 버튼 (검색 및 토글메뉴) */
   .header_search-icon_mb, .mobile_menu_btn {
     display: block;
     color: var(--s_color_bk); /* #333 */
     font-size: var(--xl_font); /* =24px (공유: 26px) */
-  }
-  .header_search-icon_mb {margin-right: 10px;}
-  .mobile_menu_btn {
     border: none;
     background: none;
-    padding: 10px 10px;
+    padding: 10px;
   }
 
+  .mobile_menu_wrap form {
+    /* margin-right: 10px; */
+    width: 100%;
+  }
+
+  .header_search-icon_mb {
+    /*position: absolute; top: 0%; right: 65%; /* left: 0%; */
+    position: relative;
+    z-index: 20;
+    transition: right 0.3s ease;
+    right: -10px;
+  }
+  /* 모바일 메뉴 - 아이콘 서식 변경 */
+  .mobile_menu_wrap .svg-inline--fa, .mobile_menu_btn .svg-inline--fa {
+    vertical-align: 0.1em;
+    font-size: 24px;
+  }
+
+  /* 모바일 검색창 효과 (GPT참고) */
+  .mb_search_input {
+    position: absolute;
+    top: 5px; right: 0; width: 0; opacity: 0; font-size: 14px; border: 1px solid var(--m_color_g); /* #156615 */ transition: width 0.3s ease, opacity 0.3s ease; pointer-events: none; z-index: 10;
+    border-radius: 15px; 
+    text-indent: 5px;
+    padding: 5px 10px 5px 25px;
+    box-sizing: border-box;
+  }
+  .mb_search_input.open {
+    width: 170px; opacity: 1; pointer-events: auto; right: 35px;
+  }
+  .mb_search_form.open .header_search-icon_mb {right: 120px; top: 0px; color: var(--m_color_g); /* #156615 */}
+
   /* 헤더 검색창 */
-  .header_search_wrap {
+  /* .header_search_wrap {
     position: static;
     transform: none;
     width: auto;
@@ -495,7 +551,7 @@ footer{
   }
   .header_search_wrap form {
     width: auto;
-  }
+  } */
 
   /* 로고 크기 및 위치 */
   /* .header_logo {
@@ -507,11 +563,8 @@ footer{
     margin-right: 340px;
   } */
 
-  /* 검색창 숨김 */
-  .header_search_wrap, 
-  .header_search_wrap input {
-    display: none;
-  }
+  /* PC 검색창 숨김 */
+  .header_search_wrap {display: none;}
   
   /* 검색 아이콘 위치 조정 */
   /*.header_search-icon {
@@ -729,9 +782,12 @@ footer{
 
   .fixed_mobile_footer .footer_btn{display: block;}
 
+  /* 메인 섹션 */
   /* main, .main-content {
     padding-top: 105px !important;
   } */
+  /* 메인 섹션 - 상단 콘텐츠 여백 조정(헤더 겹치지 않게) */
+  main .main_contents {padding-top: 5px;}
 }
 
 /* 태블릿 이상(PC 포함) */
