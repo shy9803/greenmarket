@@ -1,8 +1,9 @@
 // components/ItemCard.js
 import React from 'react';
 import {Link} from 'react-router-dom';
+import { getTimeAgo } from '../utils/getTimeAgo';
 
-function ItemCard({ imgSrc, brand, name, price, time }) {
+function ItemCard({ imgSrc, brand, name, price, datetime }) {
   return (
     <Link to='/ItemDetail'>
     <li>
@@ -10,7 +11,7 @@ function ItemCard({ imgSrc, brand, name, price, time }) {
       <span className='brand'>{brand}</span>
       <p className='item_name'>{name}</p>
       <p className='price'>{price}</p>
-      <p className='register_time'>{time}</p>
+      <p className='register_time'>{getTimeAgo(datetime)}</p>
     </li>
     </Link>
   );

@@ -332,7 +332,7 @@ export default function ProductPage() {
               brand={it.brand}
               name={it.name}
               price={`${it.price.toLocaleString()}원`}
-              time={it.datetime}
+              datetime={it.datetime}
             />
           ))}
         </ul>
@@ -347,7 +347,7 @@ export default function ProductPage() {
               brand={it.brand}
               name={it.name}
               price={`${it.price.toLocaleString()}원`}
-              time={it.datetime}
+              datetime={it.datetime}
             />
           ))}
         </ul>
