@@ -384,9 +384,9 @@ footer{
     position: relative;
   }
 
-  .header_logo {
+  /* .header_logo {
     width: 80%;
-  }
+  } */
 
   /* 헤더 검색창 */
   .header_search_wrap {
@@ -481,7 +481,7 @@ footer{
 
   /* 헤더 로고 서식 변경 */
   .header_logo {width: 100%;}
-  .header_logo a {width: 50%;}
+  .header_logo a {width: 50%; max-width: 170px;}
   .header_logo img {margin: 22px 0;}
 
   /* 모바일 메뉴 (검색창 및 토글메뉴) */
