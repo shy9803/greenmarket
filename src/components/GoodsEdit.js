@@ -43,7 +43,7 @@ function GoodsEdit() {
   useEffect(() => {
     const fetchProduct = async () => {
       try {
-        const res = await axios.get(`http://localhost:9070/products/${id}`);
+        const res = await axios.get(`https://port-0-backend-mbiobig1cd0dc4c0.sel4.cloudtype.app/products/${id}`);
         console.log("응답 데이터:", res.data);
         const data = res.data; 
 
@@ -62,10 +62,10 @@ function GoodsEdit() {
 
         setImages((prev) => {
           const copy = [...prev];
-          if (data.image_main) copy[0] = `http://localhost:9070/uploads/${data.image_main}`;
+          if (data.image_main) copy[0] = `https://port-0-backend-mbiobig1cd0dc4c0.sel4.cloudtype.app/uploads/${data.image_main}`;
           for (let i = 1; i <= 6; i++) {
             if (data[`image_${i}`]) {
-              copy[i] = `http://localhost:9070/uploads/${data[`image_${i}`]}`;
+              copy[i] = `https://port-0-backend-mbiobig1cd0dc4c0.sel4.cloudtype.app/uploads/${data[`image_${i}`]}`;
             }
           }
           return copy;
@@ -143,7 +143,7 @@ function GoodsEdit() {
     });
 
     try {
-      const res = await axios.post(`http://localhost:9070/products/edit/${id}`, fd, {
+      const res = await axios.post(`https://port-0-backend-mbiobig1cd0dc4c0.sel4.cloudtype.app/products/edit/${id}`, fd, {
         headers: {
           'Content-Type': 'multipart/form-data',
           Authorization: `Bearer ${token}`,

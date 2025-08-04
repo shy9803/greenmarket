@@ -12,7 +12,7 @@ import '../style/ItemDetail.css';
 
 import ItemCard2 from './ItemCard2';
 
-const BASE_URL = 'http://localhost:9070';
+const BASE_URL = 'https://port-0-backend-mbiobig1cd0dc4c0.sel4.cloudtype.app';
 
 function ItemDetail() {
   const { id } = useParams();

@@ -41,7 +41,7 @@ function Notice() {
   // 리스트 조회
   const loadData = () => {
     axios
-    .get('http://localhost:9070/notice')
+    .get('https://port-0-backend-mbiobig1cd0dc4c0.sel4.cloudtype.app/notice')
     // 성공시
     .then(res => {
       setData(res.data);
@@ -55,7 +55,7 @@ function Notice() {
   const delData = (id) => {
     if(window.confirm('데이터를 삭제하시겠습니까?')) {
       axios
-      .delete(`http://localhost:9070/notice/${id}`)
+      .delete(`https://port-0-backend-mbiobig1cd0dc4c0.sel4.cloudtype.app/notice/${id}`)
       .then(() => {
         alert('삭제가 완료되었습니다.');
         loadData();

@@ -22,7 +22,7 @@ function NoticeDetail(props) {
   // 서버 응답값
   useEffect(() => {
     axios
-    .get(`http://localhost:9070/notice/${id}`)
+    .get(`https://port-0-backend-mbiobig1cd0dc4c0.sel4.cloudtype.app/notice/${id}`)
     .then(res => {
       console.log('서버 응답값 : ', res.data);
       setForm(res.data);
@@ -54,7 +54,7 @@ function NoticeDetail(props) {
   const delData = (id) => {
     if(window.confirm('데이터를 삭제하시겠습니까?')) {
       axios
-      .delete(`http://localhost:9070/notice/${id}`)
+      .delete(`https://port-0-backend-mbiobig1cd0dc4c0.sel4.cloudtype.app/notice/${id}`)
       .then(() => {
         alert('삭제가 완료되었습니다.');
         navigate('/notice');
