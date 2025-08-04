@@ -31,6 +31,7 @@ body, html {
 * {
   font-family: 'Noto Sans KR', 'SUIT', 'Protest Strike', sans-serif;
   font-size: var(--m_font);
+  color: var(--s_color_bk);
 }
 a {
   text-decoration: none;
@@ -77,9 +78,10 @@ a {
   /* text-indent: 35px; */
   /* padding: 5px; */
   text-indent: 5px;
-  padding: 5px 10px 5px 35px;
+  padding: 5px 45px 5px 15px; /* 팀 작업시 5px 10px 5px 35px */
   box-sizing: border-box;
   width: 100%; /* = 400px */
+  height: 50px;
 }
 .header_search_wrap input:focus {
   outline: none;
@@ -87,12 +89,14 @@ a {
 }
 .header_search-icon {
   position: absolute;
-  top: 5px;
-  left: 10px;
+  top: 12px; /*팀 작업시 5px*/
+  /* left: 10px; */
+  right: 16px;
   color: var(--m_color_g); /* #156615 */
   background: none;
   border: none;
 }
+.header_search-icon svg {font-size: var(--l_font);}
 
 /* 로그인 정보 */
 .header_user_info {
@@ -507,6 +511,7 @@ footer{
     border: none;
     background: none;
     padding: 10px;
+    position: relative; right: -13px;
   }
 
   .mobile_menu_wrap form {
@@ -519,27 +524,28 @@ footer{
     position: relative;
     z-index: 20;
     transition: right 0.3s ease;
-    right: -10px;
+    right: -20px;
   }
   /* 모바일 메뉴 - 아이콘 서식 변경 */
   .mobile_menu_wrap .svg-inline--fa, .mobile_menu_btn .svg-inline--fa {
     vertical-align: 0.1em;
     font-size: 24px;
   }
+  .mobile_menu_btn .fa-xmark {font-size: 28px;}
 
   /* 모바일 검색창 효과 (GPT참고) */
   .mb_search_input {
     position: absolute;
     top: 5px; right: 0; width: 0; opacity: 0; font-size: 14px; border: 1px solid var(--m_color_g); /* #156615 */ transition: width 0.3s ease, opacity 0.3s ease; pointer-events: none; z-index: 10;
     border-radius: 15px; 
-    text-indent: 5px;
-    padding: 5px 10px 5px 25px;
+    text-indent: 12px;
+    padding: 5px 35px 5px 5px; /* 팀 작업시 5px 10px 5px 25px */
     box-sizing: border-box;
   }
   .mb_search_input.open {
-    width: 170px; opacity: 1; pointer-events: auto; right: 35px;
+    width: 190px; opacity: 1; pointer-events: auto; right: 30px; height: 40px;
   }
-  .mb_search_form.open .header_search-icon_mb {right: 120px; top: 0px; color: var(--m_color_g); /* #156615 */}
+  .mb_search_form.open .header_search-icon_mb {/*right: 130px;*/ top: 2px; color: var(--m_color_g); /* #156615 */}
 
   /* 헤더 검색창 */
   /* .header_search_wrap {
@@ -589,14 +595,14 @@ footer{
   .mobile_menu { /* 인라인 스타일 이동 및 기존 서식 수정 */
     position: fixed;
     top: 0; /* 공유: 110px */
-    left: 0; /* 공유: 15px; */
+    /* left: 0; /* 공유: 15px; */
     width: 250px; /* 공유: 100% */
     background-color: #fff;
     border-top: 1px solid #ccc;
     box-shadow: 0 2px 5px rgba(0,0,0,0.1);
     z-index: 1001; /* 공유: 1000 */
     /* 이하 인라인 스타일 */
-    /* right: 0; */
+    right: 0;
     height: 100vh;
     padding-top: 60px;
     display: flex;
@@ -615,11 +621,13 @@ footer{
     text-align: center;
     /* margin: 25px 0; // 3번째 ul */
   }
+  .mobile_menu ul:last-child {margin-top: 0;}
   
   .mobile_menu li {
     padding: 10px 0;
     border-bottom: 1px solid #eee;
   }
+  .mobile_menu li:last-child {border-bottom: none;}
 
   .mobile_menu li span {
     font-weight: bold;

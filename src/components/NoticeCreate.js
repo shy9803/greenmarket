@@ -22,7 +22,7 @@ function NoticeCreate() {
     e.preventDefault();
 
     axios
-    .post('https://port-0-backend-mbiobig1cd0dc4c0.sel4.cloudtype.app/notice', form)
+    .post('http://localhost:9070/notice', form)
     .then(() => {
       alert('공지글이 등록되었습니다.');
       navigate('/notice');

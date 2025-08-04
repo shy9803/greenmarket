@@ -100,6 +100,11 @@ function MainList(props) {
           <p>여기를 눌러서 좌우로 밀어보세요~!</p>
         </div>
       </div>
+
+      {/* 팀 프로젝트 이후 추가분 */}
+      <div className='main_list_morebtn'>
+        <Link to='/productpage' alt='더보기'>더보기</Link>
+      </div>
     </section>
   );
 }

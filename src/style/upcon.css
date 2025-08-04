@@ -119,4 +119,8 @@
   }
   .upcon_menubox ul {flex-wrap: wrap;}
   .upcon_menubox li {width: 50%; margin: 10px auto;}
+
+  /* 프로젝트 이후 수정분 */
+  .upcon_banner {height: 100px;}
+  .banner-title {font-size: 1.25rem;}
 }

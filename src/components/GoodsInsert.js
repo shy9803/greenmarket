@@ -132,7 +132,7 @@ function GoodsInsert() {
   
     try {
       // const res = await axios.post('https://port-0-backend-mbiobig1cd0dc4c0.sel4.cloudtype.app/products', fd, {
-      await axios.post('https://port-0-backend-mbiobig1cd0dc4c0.sel4.cloudtype.app/products', fd, {
+      await axios.post('http://localhost:9070/products', fd, {
         headers: {
           'Content-Type': 'multipart/form-data',
           Authorization: `Bearer ${token}`,  // 여기 토큰을 꼭 넣어주세요

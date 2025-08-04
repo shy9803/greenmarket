@@ -72,8 +72,8 @@
 }
 
 .main_list .main_list_label {
-  background: var(--s_color_bk); /* #333 */
-  color: var(--m_color_wh); /* #fff */
+  background: var(--s_color_g); /* #B9EC8F | 팀 작업시: #333 */
+  color: var(--m_color_bk); /* #333 | 팀 작업시: #fff */
   font-size: var(--xs_font); /* 13px */
   padding: 6px 12px;
   display: inline-block;
@@ -101,6 +101,11 @@
 .main_list_wrap:hover .rightPage {
   opacity: 1;
 }
+
+/* 더보기 버튼 (이후 추가분) */
+.main_list_morebtn {width: 100%; text-align: center; margin-top: 10px;}
+.main_list_morebtn > a {border: 1px solid #ddd; padding: 12px 15px; border-radius: 3px; transition: background 0.15s linear; width: 100%; display: block; box-sizing: border-box;}
+.main_list_morebtn > a:hover {background: var(--s_color_g);}
 
 /* 반응형 */
 /* tablet, mobile 공통 */

@@ -12,7 +12,7 @@ import '../style/ItemDetail.css';
 
 import ItemCard2 from './ItemCard2';
 
-const BASE_URL = 'https://port-0-backend-mbiobig1cd0dc4c0.sel4.cloudtype.app';
+const BASE_URL = 'http://localhost:9070';
 
 function ItemDetail() {
   const { id } = useParams();
@@ -109,7 +109,10 @@ function ItemDetail() {
   return (
     <>
       <div className='item_detail_wrap'>
-        <p className='item_category'>{item.kind}</p>
+        <p className='item_category'>
+          <Link to='/' alt='홈'>Home</Link>
+          <Link to='/' alt={item.kind}>{item.kind}</Link>
+        </p>
         <div className='detail_top_wrap'>
           <div className='detailSlide_wrap'>
             {/* {imageList.length > 0 && (

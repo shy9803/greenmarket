@@ -13,7 +13,7 @@ import ItemCard2 from './ItemCard2';
 import dummyProducts from '../data/dummyProducts.json'; // 더미 상품
 
 // URL 주소 (유지보수성 탁월)
-const BASE_URL = 'https://port-0-backend-mbiobig1cd0dc4c0.sel4.cloudtype.app';
+const BASE_URL = 'http://localhost:9070';
 
 /* ▸ 필터용 상수 (원본 그대로) */
 const CATEGORY = ['여성의류', '남성의류', '가방', '신발', '패션잡화', '키즈', '라이프', '전자기기', '반려동물','기타'];

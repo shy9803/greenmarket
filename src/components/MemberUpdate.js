@@ -23,11 +23,11 @@ function MemberUpdate() {
   // 발송 데이터 통신 성공여부 확인 출력
   useEffect(() => {
     axios
-    .get(`https://port-0-backend-mbiobig1cd0dc4c0.sel4.cloudtype.app/member/${id}`) // 전체 조회된 내용 중 숫자를 get방식으로 하여 해당 내용 조회.
+    .get(`http://localhost:9070/member/${id}`) // 전체 조회된 내용 중 숫자를 get방식으로 하여 해당 내용 조회.
     .then(res => {
       const fetched = res.data;
 
-      // console.log('서버 응답값 : ', res.data);
+      console.log('서버 응답값 : ', res.data);
       setForm(prevForm => {
         const isSame = 
         prevForm.username === fetched.username &&
@@ -82,7 +82,7 @@ function MemberUpdate() {
     }
 
     axios
-    .put(`https://port-0-backend-mbiobig1cd0dc4c0.sel4.cloudtype.app/member/update/${id}`, updateData)
+    .put(`http://localhost:9070/member/update/${id}`, updateData)
     .then(() => {
       alert('수정이 완료되었습니다.');
       navigate('/');

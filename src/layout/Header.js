@@ -120,12 +120,12 @@ function Header() {
             <input name="keyword" type="text" placeholder="검색어를 입력해주세요" maxLength='30'
               ref={mbSearchRef}
               className={`mb_search_input ${searchOpen ? 'open' : ''}`}
-              onKeyDown={e => {
-                if (e.key === 'Enter') {
-                  e.preventDefault();
-                  handleMbSearchSubmit(e);
-                }
-              }}
+              // onKeyDown={e => {
+              //   if (e.key === 'Enter') {
+              //     e.preventDefault();
+              //     handleMbSearchSubmit(e);
+              //   }
+              // }} -> 해당 속성으로 인한 Enter키 입력시 오류화면 출력
             />
           </form>
 
@@ -219,7 +219,8 @@ function Header() {
             />
 
             {/* 오른쪽에서 슬라이드로 나오는 메뉴 */}
-            <div className="mobile_menu" style={{ transform: menuOpen ? 'translateX(250px)': 'translateX(100%)'}}>
+            <div className="mobile_menu" style={{ transform: menuOpen ? 'translateX(0px)': 'translateX(100%)'}}>
+              {/* 팀 작업시: translateX(250px) <- 위치 오류 발견 */}
               <ul>
                 {username ? (
                   <>

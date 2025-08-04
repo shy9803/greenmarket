@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import ItemCard from './ItemCard';
+import ItemCard from './ItemCardMainTab';
 import itemData from '../data/itemData';
 import '../style/maintab.css';
 
@@ -7,8 +7,16 @@ function MainTab(props) {
   const [activeTab, setActiveTab] = useState("# 집꾸미기");
   const tabs = Object.keys(itemData);
 
+  // 탭별 제목 (프로젝트 이후 추가(공유 누락 부분))
+  const tabTitles = {
+    "# 집꾸미기": "집꾸미기도 알뜰한 그린마켓 추천템과 함께", // Figma UI디자인 작성 제목
+    "# 러닝용품": "러닝용품도 알뜰한 그린마켓 추천템과 함께",
+    "# 자취인필수": "자취인들에게 필수적인 용품도 알뜰한 그린마켓 추천템과 함께"
+  }
+
   return (
     <div className='main_tab_con'>
+
       <div className='main_tab_wrap'>
         {/* 탭 버튼 */}
         <ul className='main_tab_btns'>
@@ -23,6 +31,8 @@ function MainTab(props) {
             </li>
           ))}
         </ul>
+
+        <h2>{tabTitles[activeTab]}</h2>
 
         {/* 탭 콘텐츠 */}
         <div className='main_tab_content'>
@@ -50,7 +60,7 @@ function MainTab(props) {
                     brand={item.brand}
                     name={item.name}
                     price={item.price}
-                    time={item.time}
+                    datetime={item.time}
                   />
                 ) : (
                   <li key={item.id}>{item.name}</li>

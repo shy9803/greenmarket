@@ -4,8 +4,6 @@ import '../style/itemcard2.css';
 import { getTimeAgo } from '../utils/getTimeAgo';
 
 function ItemCard2({ id, imgSrc, brand, name, price, datetime }) {
-  console.log('datetime prop:', datetime);
-  
   return (
     <li className="itemcard2">
       <Link to={`/products/${id}`}>
