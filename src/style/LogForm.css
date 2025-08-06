@@ -22,7 +22,7 @@
 
 /* 내용 입력 */
 .logform p, .logform_social {
-  margin: 35px 0;
+  margin: 35px auto;
 }
 
 .logform input {
@@ -238,6 +238,10 @@
   .logform {
     max-width: 610px; /* pc에서 설정한 너비값 */
     width: 96%;
-    padding: 0 2%;
+    padding: 100px 2% 0 2%; /* 발표 당시 누락된 상단 100px 추가 */
+  }
+  /* 프로젝트 당시 미입력된 오류 수정 */
+  .logform_findjoin a {
+    padding: 0 15px;
   }
 }

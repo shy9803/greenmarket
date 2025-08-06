@@ -17,3 +17,21 @@
 .cart_btn_buy, .cart_btn_delete{width: 100px; margin:5px; cursor: pointer; border-radius: 15px; border: 1px solid var(--m_color_g); background-color:var(--m_color_wh);}
 
 .cart_btn_buy:hover, .cart_btn_delete:hover{background-color: var(--m_color_g); color:var(--m_color_wh)}
+
+/* 팀 프로젝트 이후 미작업된 반응형 별도 추가 */
+/* ────────── 태블릿 이하 (모바일 포함) (~ 1024px) ────────── */
+@media screen and (max-width: 1024px) {
+  .cart_wrap {padding: 100px 5px 0 5px; width: 100%; box-sizing: border-box;}
+  .cart_table {width: 100%;}
+
+}
+
+/* ────────── 태블릿 전용 (768px ~ 1024px) ────────── */
+@media screen and (min-width: 768px) and (max-width: 1024px) {
+
+}
+
+/* 모바일 전용 */
+@media screen and (max-width: 767px){
+  .cart_table th, .cart_table td {padding: 0;}
+}

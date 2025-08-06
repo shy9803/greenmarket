@@ -123,5 +123,5 @@
   }
 
   /* 프로젝트 이후 수정분 */
-  .swiper-slide {height: 230px;}
+  .slide_wrap .swiper-slide {height: 280px;}
 }

@@ -1,0 +1,6 @@
+@charset "UTF-8";
+
+.topbtn {position: fixed; right: 10px; bottom: 25px;}
+.topbtn button {padding: 10px; border: 1px solid #ccc; background: #fcfcfc; border-radius: 5px; text-align: center; display: block; z-index: 500; cursor: pointer;}
+.topbtn button:hover {background: #eee;}
+.topbtn span {display: block;}

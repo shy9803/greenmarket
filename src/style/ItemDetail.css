@@ -36,6 +36,7 @@
 .profile_wrap {
   display: flex;
   justify-content: flex-start;
+  margin-top: 10px; /* 팀 프로젝트 이후 별도 추가 */
 }
 
 .seller_profile {
@@ -118,13 +119,15 @@
 }
 
 .item_btns {
-  list-style: none;
+  /* list-style: none; */
   display: flex;
   padding: 0;
   margin-top: 100px;
   justify-content: space-evenly;
 }
 .item_category{padding-bottom: 10px; color:var(--s_color_bk);}
+.item_category > a:first-child::after {content: ' > '; display: inline-block; margin: 0 10px;} /* 팀 프로젝트 이후 별도 추가 */
+
 .btn_cart{margin: 0px 20px;}
 .btn_question,
 .btn_cart,
@@ -136,6 +139,7 @@
   font-size: 16px;
   cursor: pointer;
   transition: background-color 0.3s ease;
+  /* 별도 추가 */ border-radius: 3px;
 }
 
 .btn_question {
@@ -244,6 +248,8 @@
 .item_manage_buttons {margin-top: 20px;}
 .item_manage_buttons button:first-child {margin-right: 10px;}
 .item_manage_buttons button:last-child {background-color: #e74c3c; color: #fff;}
+/* 별도 추가 */
+.item_manage_buttons button {border: none; padding: 6px 20px; border-radius: 3px;}
 
 .seller_products_section > h3,
 .category_products_section > h3 {
@@ -251,3 +257,37 @@
   font-weight: bold; font-size: 20px;
 }
 .product_list_grid {display: flex; flex-wrap: wrap; gap: 20px; margin-top: 10px; width: 1200px; margin: 0 auto;}
+
+/* 팀 프로젝트 이후 미작업된 반응형 별도 추가 */
+/* ────────── 태블릿 이하 (모바일 포함) (~ 1024px) ────────── */
+@media screen and (max-width: 1024px) {
+  .item_detail_wrap {width: 100%;}
+  .detailSlide_wrap {width: 100%;}
+  .item_btns_wrap {width: 100%;}
+  .item_btns li {margin: 5px 0;}
+  .profile_wrap {margin-top: 0;}
+}
+
+/* ────────── 태블릿 전용 (768px ~ 1024px) ────────── */
+@media screen and (min-width: 768px) and (max-width: 1024px) {
+  .item_info {width: 54%;}
+  .item_btns {flex-wrap: wrap; justify-content: flex-start;}
+  
+}
+
+/* 모바일 전용 */
+@media screen and (max-width: 767px){
+  .item_detail_wrap, .detail_top_wrap, .item_info {position: static;}
+
+  .item_detail_wrap {padding: 140px 1% 0 1%; box-sizing: border-box; height: auto;}
+
+  .detail_top_wrap {display: block; width: 100%;}
+  .profile_wrap {display: block;}
+
+  .item_info {width: 100%;}
+  .item_btns {display: block;}
+  .btn_cart {margin: 0;}
+  .item_btns li button {width: 100%;}
+
+  .seller_products_section, .category_products_section {padding: 0 1%; box-sizing: border-box;}
+}

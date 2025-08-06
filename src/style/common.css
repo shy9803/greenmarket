@@ -101,7 +101,7 @@ a {
 /* 로그인 정보 */
 .header_user_info {
   position: absolute;
-  top: 10px;
+  top: 35px;  /* 팀 프로젝트 당시 10px */
   right: 0;
 }
 
@@ -110,7 +110,7 @@ a {
   font-size: var(--s_font); /* 14px */
   position: absolute;
   right: 0;
-  top: 50px;
+  top: 70px;  /* 팀 프로젝트 당시 50px */
 }
 .header_lnb_wrap li {
   display: inline-block;
@@ -148,7 +148,7 @@ a {
 .header_gnb_wrap {
   position: absolute;
   right: 0;
-  top: 90px;
+  top: 105px; /* 팀 프로젝트 당시 90px */
 }
 .header_gnb_wrap li {
   display: inline-block;
@@ -183,13 +183,14 @@ footer{
   height: 200px;
   margin-top: 20px;
   transition: height 0.3s ease;
+  color: var(--m_color_wh);
 }
 
 /* 푸터 내 공통 적용 */
 .footer_gnb ul, .footer_con, .footer_cs_menu{
   display: flex;
 }
-.footer_gnb a, .footer_cs_menu a {
+.footer_gnb a, .footer_cs_menu a, .footer_con p {
   color: var(--m_color_wh); /* #fff */
 }
 
@@ -303,7 +304,7 @@ footer{
     display: flex;
     align-items: center;
     justify-content: space-between;
-    height: 100px; /* = PC,tablet 동일 (공유: 110px) */
+    height: 140px; /* = PC,tablet 동일 (공유: 110px) | 발표 당시 100px */
   }
 
   /* 헤더 로고 */
@@ -377,6 +378,15 @@ footer{
   }
 
   /* .footer_address{font-size: var(--xs_font);} */
+
+  /* ────────── 메인 섹션 ────────── */ /* 프로젝트 이후 수정 */
+  /* 컴포넌트별 여백 */
+  .main_section {
+    margin: 15% auto;
+  }
+  .main_tab {
+    margin-top: 20%;
+  }
 }
 
 /* ────────── 태블릿 전용 (768px ~ 1024px) ────────── */
@@ -391,6 +401,10 @@ footer{
   /* .header_logo {
     width: 80%;
   } */
+
+  .header_user_info {
+    top: 30px;  /* 팀 프로젝트 당시 미기입 */
+  }
 
   /* 헤더 검색창 */
   .header_search_wrap {
@@ -417,6 +431,7 @@ footer{
     order: 4; /* 전: 3 */
     /* width: 100%; */
     margin: -4px 0; /* 전: -20px 0 */
+    top: 75px;  /* 팀 프로젝트 당시 미기입 */
   }
   .header_lnb_wrap ul {
     display: flex;
@@ -429,6 +444,7 @@ footer{
     display: flex;
     justify-content: flex-end;
     margin: -10px 0 8px;
+    top: 120px;  /* 팀 프로젝트 당시 미기입 */
   }
   .header_gnb_wrap ul {
     display: flex;
@@ -481,6 +497,7 @@ footer{
     left: 0;
     background-color: #fff;
     z-index: 100;
+    height: 100px; /* 높이값 추가(이전값 적용) */
   }
 
   /* 헤더 로고 서식 변경 */

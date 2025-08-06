@@ -9,7 +9,7 @@
 /* Link 전체 영역 차지 */
 .itemcard2 a {
   display: block;
-  text-decoration: none;
+  /* text-decoration: none; */
   color: inherit;
 }
 
@@ -34,13 +34,15 @@
 /* 브랜드 레이블 */
 .brand2 {
   display: inline-block;
-  background: #000;
-  color: #fff;
+  background: var(--s_color_g); /* 프로젝트 당시: #000 */
+  /* color: #fff; */
   padding: 4px 10px;
   border-radius: 6px;
   font-size: var(--xs_font);
   margin-top: 6px;
 }
+/* 별도 추가 */
+.itemcard2 p {margin: 10px 0;}
 
 /* 상품명: 길면 말줄임 */
 .item_name {

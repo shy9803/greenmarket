@@ -123,6 +123,8 @@
 
 /* mobile (max-width: 767px) */
 @media screen and (max-width: 767px) {
+  .notice_section {padding-top: 110px;} /* 발표 당시 누락된 오류 수정 */
+
   .notice_page table thead tr th:nth-child(2) {
     width: 60%;
   }

@@ -23,8 +23,9 @@ import MemberUpdate from './components/MemberUpdate';
 import InquiryForm from './components/InquiryForm';
 import Qna from './components/Qna';
 import GoodsEdit from './components/GoodsEdit'; /* 상품 수정 */
-import DummyItemDetail from './components/DummyItemDetail'; // 더미 상세보기(JSON파일)
 // import OtherPage from './components/OtherPage';  // 필요하다면 추가
+import Topbtn from './components/Topbtn';
+import ProductRouter from './components/ProductRouter';
 
 function App() {
   return (
@@ -43,7 +44,8 @@ function App() {
           <Route path="/productpage" element={<ProductPage />} />
           <Route path="/itemdetail" element={<ItemDetail />} />
           <Route path="/goodsinsert" element={<GoodsInsert />} />
-          <Route path="/products/:id" element={<ItemDetail />} />
+          {/* <Route path="/products/:id" element={<ItemDetail />} /> : DB상품 출력(프로젝트 당시) */}
+          <Route path="/products/:id" element={<ProductRouter />} /> {/* 더미 상품+DB 상품 출력 */}
           <Route path="/products/edit/:id" element={<GoodsEdit />} />
 
           {/* 고객센터 */}
@@ -57,14 +59,13 @@ function App() {
           {/* 회원정보 수정 */}
           <Route path="/member/update/:id" element={<MemberUpdate />} />
 
-          {/* 더미 제품 */}
-          <Route path="/products/:id" element={<DummyItemDetail />} />
-
           {/* <Route path="/other" element={<OtherPage />} /> */}
         </Routes>
 
 
       <Footer />
+
+      <Topbtn />
     </BrowserRouter>
   );
 }

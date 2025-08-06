@@ -250,5 +250,15 @@
 
 /* 모바일 전용 */
 @media screen and (max-width: 767px) {
-  
+  /* 프로젝트 당시 모바일 부분만 누락되어 별도 기입 */
+  .productpage_wrap {width: 100%;}
+  .productpage_tab-list {flex-wrap: wrap;}
+  .productpage_tab-item {width: 100%; max-width: none; flex: auto; margin: 5px auto;}
+
+  .productpage_grid {grid-template-columns: repeat(2, 1fr);}
+  .price-inputs button {margin-top: 8px;}
+  .etc_title {margin-bottom: 12px;}
+
+  .productpage_items_list {grid-template-columns: repeat(2,1fr);}
+  .itemcard2 {width: 100%;}
 }

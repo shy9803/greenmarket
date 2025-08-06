@@ -2,8 +2,9 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
-  faChevronDown, faChevronUp, faAngleLeft,
-  faBagShopping, faHouse, faUser, faCartShopping
+  faChevronDown, faChevronUp,
+  faBagShopping, faHouse, faUser, faCartShopping,
+  faList
 } from '@fortawesome/free-solid-svg-icons';
 
 function Footer(props) {
@@ -80,9 +81,10 @@ function Footer(props) {
 
       {/* 고정 하단 메뉴 */}
       <div className="fixed_mobile_footer">
-        <button className="footer_btn" onClick={() => window.history.back()}>
-          <FontAwesomeIcon icon={faAngleLeft} />
-        </button>
+        {/* <button className="footer_btn" onClick={() => window.history.back()}><FontAwesomeIcon icon={faAngleLeft} /></button> : 프로젝트 당시 */}
+        <Link to="/productpage" className="footer_btn">
+          <FontAwesomeIcon icon={faList} />
+        </Link>
         <Link to="/goodsinsert" className="footer_btn">
           <FontAwesomeIcon icon={faBagShopping} />
         </Link>

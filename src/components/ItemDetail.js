@@ -111,7 +111,7 @@ function ItemDetail() {
       <div className='item_detail_wrap'>
         <p className='item_category'>
           <Link to='/' alt='홈'>Home</Link>
-          <Link to='/' alt={item.kind}>{item.kind}</Link>
+          <Link to='/productpage' alt={item.kind}>{item.kind}</Link>
         </p>
         <div className='detail_top_wrap'>
           <div className='detailSlide_wrap'>
